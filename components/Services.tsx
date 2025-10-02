@@ -1,38 +1,47 @@
 import React from 'react';
 import FadeIn from './FadeIn';
 
-const BrushIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-    </svg>
-);
-
-const ShieldCheckIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-    </svg>
-);
-
-const RepairIcon = () => (
+// NEW: A "Sparkles" icon to represent a clean, "like-new" finish.
+const CleaningIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.87-5.87m0 0L11.42 15.17m5.87-5.87L11.42 3.5l-5.87 5.87m5.87 5.87-5.87-5.87" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+    </svg>
+);
+
+// NEW: A simplified icon of a push brush to represent the Polymeric Sanding process.
+const SandingIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+        {/* Brush Head */}
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 15h16" />
+        {/* Handle */}
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15l7-11" />
+        {/* Bristles */}
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 15v4m4-4v4m4-4v4m4-4v4" />
+    </svg>
+);
+
+
+// This icon cleverly represents a paver extractor, a tool specific to paver repair.
+const PaverExtractorIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.87-5.87m0 0L11.42 15.17m5.87-5.87L11.42 3.5l-5.87 5.87m5.87 5.87-5.87-5.87" />
     </svg>
 );
 
 
 const services = [
   {
-    icon: <BrushIcon />,
+    icon: <CleaningIcon />,
     title: 'Cleaning & Sealing',
     description: 'Deep cleaning to remove dirt, grime, and stains, followed by a high-quality sealant to protect and enhance your pavers.'
   },
   {
-    icon: <ShieldCheckIcon />,
+    icon: <SandingIcon />,
     title: 'Polymeric Sanding',
     description: 'We replace old joint sand with new polymeric sand to prevent weed growth, resist erosion, and lock your pavers in place.'
   },
   {
-    icon: <RepairIcon />,
+    icon: <PaverExtractorIcon />,
     title: 'Repair & Restoration',
     description: 'Lifting and re-leveling sunken pavers, replacing broken ones, and restoring the structural integrity of your pavement.'
   },
