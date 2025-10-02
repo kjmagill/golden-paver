@@ -1,20 +1,19 @@
 <!-- 
   This favicon has been optimized for sharpness at small sizes (e.g., 16x16).
   - A solid background rectangle provides high contrast and a defined shape.
-  - The logo's individual "paver" rectangles have been fused into a single, solid shape 
-    by removing gaps and rounded corners. This prevents anti-aliasing artifacts that cause blurriness.
+  - Gaps are intentionally placed between the "paver" rectangles. This is crucial to prevent them
+    from merging into a blurry blob at small resolutions, ensuring the logo shape remains distinct.
   - `shape-rendering="geometricPrecision"` hints to the browser to prioritize sharpness.
 -->
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
   <rect width="100" height="100" rx="16" fill="#111F3A"/>
-  <g transform="translate(5, 5) scale(0.9)">
-    <g fill="#CA9703">
-      <rect x="0" y="0" width="28" height="28" />
-      <rect x="28" y="0" width="72" height="28" />
-      <rect x="0" y="28" width="60" height="34" />
-      <rect x="60" y="28" width="40" height="72" />
-      <rect x="0" y="62" width="28" height="38" />
-      <rect x="28" y="62" width="32" height="38" />
-    </g>
+  <!-- The logo is scaled and centered. Using the original geometry with gaps for clarity. -->
+  <g transform="translate(5, 5) scale(0.9)" fill="#CA9703">
+    <rect x="0" y="0" width="27" height="27" rx="3" />
+    <rect x="30" y="0" width="70" height="27" rx="3" />
+    <rect x="0" y="30" width="58" height="32" rx="3" />
+    <rect x="61" y="30" width="39" height="70" rx="3" />
+    <rect x="0" y="65" width="27" height="35" rx="3" />
+    <rect x="30" y="65" width="28" height="35" rx="3" />
   </g>
 </svg>
