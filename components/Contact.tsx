@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FadeIn from './FadeIn';
 
+// Defines the possible states of the form submission process.
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 interface FormData {
@@ -12,7 +13,9 @@ interface FormData {
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({ name: '', address: '', phone: '', message: '' });
+  // `status` tracks the current state of the form, used to show different UI elements (form, loading, success message).
   const [status, setStatus] = useState<FormStatus>('idle');
+  // `errors` holds validation error messages for each field.
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -20,6 +23,10 @@ const Contact: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Performs client-side validation on the form data.
+   * @returns {boolean} - True if the form is valid, false otherwise.
+   */
   const validate = (): boolean => {
     const newErrors: Partial<FormData> = {};
     if (!formData.name.trim()) newErrors.name = 'Name is required';
@@ -27,6 +34,7 @@ const Contact: React.FC = () => {
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
     if (!formData.message.trim()) newErrors.message = 'Message is required';
     setErrors(newErrors);
+    // The form is valid if the errors object has no keys.
     return Object.keys(newErrors).length === 0;
   };
 
@@ -36,10 +44,12 @@ const Contact: React.FC = () => {
       return;
     }
     setStatus('submitting');
-    // Simulate API call
+    // In a real application, this is where you would make an API call to a backend server.
+    // Here, we simulate the network request with a timeout.
     setTimeout(() => {
       console.log('Form Submitted:', formData);
       setStatus('success');
+      // Reset the form fields after successful submission.
       setFormData({ name: '', address: '', phone: '', message: '' });
     }, 1500);
   };
@@ -64,11 +74,13 @@ const Contact: React.FC = () => {
         <FadeIn delay={150}>
           <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-6 sm:p-8 rounded-lg shadow-2xl">
             {status === 'success' ? (
+              // Success message shown after the form is submitted.
               <div className="text-center py-10" role="alert" aria-live="assertive">
                 <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
                 <p>Your request has been submitted successfully. We will be in touch within 24 hours.</p>
               </div>
             ) : (
+              // The form itself.
               <form onSubmit={handleSubmit} noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
@@ -96,9 +108,10 @@ const Contact: React.FC = () => {
                   <button 
                     type="submit" 
                     disabled={status === 'submitting'} 
-                    className="w-full group inline-flex items-center justify-center gap-3 bg-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-brand-gold disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+                    className="w-full group inline-flex items-center justify-center gap-3 bg-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg active:bg-brand-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-brand-gold disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
                   >
                     {status === 'submitting' ? (
+                      // Loading state UI.
                       <>
                         <svg className="animate-spin h-5 w-5 text-brand-oxford-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" role="status" aria-label="Loading">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -107,6 +120,7 @@ const Contact: React.FC = () => {
                         <span>Sending...</span>
                       </>
                     ) : (
+                      // Default button UI.
                       <>
                         <span>Submit Request</span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">

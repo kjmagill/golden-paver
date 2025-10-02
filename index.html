@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+<!-- The `scroll-smooth` class enables smooth scrolling when navigating to anchor links -->
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <meta name="theme-color" content="#111F3A" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <title>Golden Paver Restorations | South Jersey Paver Sealing & Repair</title>
@@ -52,6 +55,11 @@
         }
       }
     </script>
+  <!-- 
+    An import map allows us to use bare module specifiers (like 'react') in our JavaScript modules,
+    and the browser will resolve them to the full URLs provided here. This avoids the need for a build step
+    for this simple project, allowing us to use React directly from a CDN.
+  -->
   <script type="importmap">
 {
   "imports": {

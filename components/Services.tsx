@@ -23,7 +23,7 @@ const RepairIcon = () => (
 const services = [
   {
     icon: <BrushIcon />,
-    title: 'Paver Cleaning & Sealing',
+    title: 'Cleaning & Sealing',
     description: 'Deep cleaning to remove dirt, grime, and stains, followed by a high-quality sealant to protect and enhance your pavers.'
   },
   {
@@ -52,6 +52,7 @@ const Services: React.FC = () => {
         </FadeIn>
         <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
+            // The `delay` prop creates a staggered animation effect, where each card fades in one after another.
             <FadeIn key={index} delay={index * 150}>
               <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2 group h-full">
                 <div className="flex justify-center mb-6 transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:-rotate-6">{service.icon}</div>

@@ -13,23 +13,31 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   beforeAlt = 'Before restoration', 
   afterAlt = 'After restoration' 
 }) => {
+  // `sliderPosition` stores the handle's position as a percentage (0-100).
   const [sliderPosition, setSliderPosition] = useState(50);
+  // `isDragging` is a flag to track whether the user is actively dragging the handle.
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * Calculates and sets the slider position based on the client's X coordinate.
+   * This is a useCallback to memoize the function, preventing re-creation on every render.
+   */
   const handleMove = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
+    // Calculate the horizontal position within the container.
     const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    // Convert the position to a percentage.
     const percent = Math.max(0, Math.min((x / rect.width) * 100, 100));
     setSliderPosition(percent);
   }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent text selection while dragging
     setIsDragging(true);
-    handleRef.current?.focus();
+    handleRef.current?.focus(); // Focus the handle for keyboard events
   }, []);
   
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -37,26 +45,26 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
     handleRef.current?.focus();
   }, []);
 
+  // Effect to handle the dragging logic by adding global event listeners.
   useEffect(() => {
     const handleMouseUp = () => setIsDragging(false);
     const handleTouchEnd = () => setIsDragging(false);
 
+    // Only move the slider if dragging is active.
     const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging) {
-        handleMove(e.clientX);
-      }
+      if (isDragging) handleMove(e.clientX);
     };
     const handleTouchMove = (e: TouchEvent) => {
-      if (isDragging) {
-        handleMove(e.touches[0].clientX);
-      }
+      if (isDragging) handleMove(e.touches[0].clientX);
     };
-
+    
+    // Add listeners to the window to capture movement anywhere on the page.
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     window.addEventListener('touchmove', handleTouchMove);
     window.addEventListener('touchend', handleTouchEnd);
     
+    // Cleanup function: remove the event listeners when the component unmounts or `isDragging` changes.
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
@@ -65,6 +73,10 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
     };
   }, [isDragging, handleMove]);
 
+  /**
+   * Handles keyboard navigation for accessibility.
+   * Allows moving the slider with left and right arrow keys.
+   */
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
       setSliderPosition(pos => Math.max(0, pos - 2));
@@ -77,18 +89,21 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
     <div 
       ref={containerRef}
       className="relative w-full aspect-[4/3] select-none overflow-hidden rounded-2xl shadow-2xl group"
+      // ARIA attributes for screen readers to understand this as a slider.
       role="slider"
       aria-valuenow={Math.round(sliderPosition)}
       aria-valuemin={0}
       aria-valuemax={100}
       aria-label="Before and after image comparison slider"
     >
-      {/* Before Image */}
+      {/* Before Image (bottom layer) */}
       <img src={before} alt={beforeAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" />
       
-      {/* After Image Container (clipped) */}
+      {/* After Image Container (top layer, clipped) */}
       <div 
         className="absolute inset-0 w-full h-full overflow-hidden" 
+        // The `clipPath` CSS property creates the reveal effect.
+        // It defines a rectangular clipping mask that is resized based on the slider's position.
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img src={after} alt={afterAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" />
@@ -98,11 +113,12 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       <div 
         ref={handleRef}
         className="absolute top-0 bottom-0 w-1 bg-white/70 cursor-ew-resize backdrop-blur-sm transition-colors duration-300 group-hover:bg-brand-gold group-focus:bg-brand-gold outline-none"
+        // The handle's `left` position is dynamically updated based on the state.
         style={{ left: `calc(${sliderPosition}% - 0.5px)` }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
         onKeyDown={handleKeyDown}
-        tabIndex={0}
+        tabIndex={0} // Makes the handle focusable.
         role="presentation" // The main container has the slider role
       >
         <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center shadow-lg border-2 border-white/50 transition-all duration-300 group-hover:scale-110 group-hover:border-brand-gold group-focus:scale-110 group-focus:border-brand-gold">

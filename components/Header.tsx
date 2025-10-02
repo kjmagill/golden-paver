@@ -8,6 +8,7 @@ const PhoneIcon = ({ className }: { className?: string }) => (
 );
 
 const Header: React.FC = () => {
+  // State to manage the visibility of the mobile navigation menu.
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
@@ -17,6 +18,11 @@ const Header: React.FC = () => {
     { href: '#contact', label: 'Contact Us' },
   ];
   
+  /**
+   * Handles smooth scrolling to an anchor target on the page.
+   * This prevents the default jumpy behavior of anchor links.
+   * @param e - The mouse event from clicking the anchor link.
+   */
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const href = e.currentTarget.getAttribute('href');
@@ -24,16 +30,20 @@ const Header: React.FC = () => {
       const targetId = href.substring(1);
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
+        // The `scrollIntoView` API with 'smooth' behavior is supported by modern browsers.
+        // The `scroll-smooth` class on the `<html>` tag in index.html serves as a fallback.
         targetElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
 
+  // A reusable button component for the "Get a Free Quote" call to action.
   const QuoteButton = ({ isMobile = false }: { isMobile?: boolean }) => (
     <a 
       href="#contact" 
       onClick={(e) => {
         handleSmoothScroll(e);
+        // If it's the mobile version of the button, close the menu after clicking.
         if (isMobile) {
           setIsOpen(false);
         }
@@ -69,6 +79,7 @@ const Header: React.FC = () => {
           <QuoteButton />
         </nav>
         <div className="md:hidden">
+          {/* Hamburger menu button */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
             className="text-brand-powder-blue focus:outline-none" 
@@ -82,13 +93,14 @@ const Header: React.FC = () => {
           </button>
         </div>
       </div>
+      {/* Mobile menu, rendered conditionally based on the `isOpen` state. */}
       {isOpen && (
         <div className="md:hidden bg-brand-oxford-blue" id="mobile-menu">
           <nav className="px-6 pt-2 pb-4 flex flex-col items-center space-y-2">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold block text-center py-2" onClick={(e) => {
                 handleSmoothScroll(e);
-                setIsOpen(false);
+                setIsOpen(false); // Close menu on navigation
               }}>
                 {link.label}
               </a>

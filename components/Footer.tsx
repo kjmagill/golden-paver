@@ -14,15 +14,7 @@ const Footer: React.FC = () => {
         </div>
         <p>&copy; {new Date().getFullYear()} Golden Paver Restorations. All Rights Reserved.</p>
         <p className="text-sm text-brand-slate-gray mt-1 flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1">
-            <span>Made with</span>
-            <img 
-              className="emoji" 
-              alt="heart" 
-              height="16" 
-              width="16" 
-              src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png" 
-            /> 
-            <span>by</span>
+            <span>Designed by</span>
             <a href="https://kjmagill.com" className="hover:text-brand-gold-light transition-colors">
               KJ Magill
             </a>

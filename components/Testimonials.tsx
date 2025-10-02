@@ -10,7 +10,7 @@ const testimonials = [
     {
         quote: "Our driveway was faded and full of weeds. After their restoration service, the color is vibrant again and the polymeric sand has kept it weed-free. Highly recommend!",
         name: "Michael B.",
-        location: "Wildwood Crest, NJ"
+        location: "Erma, NJ"
     },
     {
         quote: "I was considering replacing my entire walkway, but they restored it for a fraction of the cost. The quality of work is outstanding. Thank you!",
