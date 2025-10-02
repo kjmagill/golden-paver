@@ -1,4 +1,5 @@
 import React from 'react';
+import FadeIn from './FadeIn';
 
 const testimonials = [
     {
@@ -22,23 +23,27 @@ const Testimonials: React.FC = () => {
     return (
         <section id="testimonials" className="py-16 sm:py-20 bg-white">
             <div className="container mx-auto px-6">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">What Our Clients Say</h2>
-                    <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
-                        We take pride in our work, and our clients' satisfaction is our greatest reward.
-                    </p>
-                </div>
+                <FadeIn>
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">What Our Clients Say</h2>
+                        <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
+                            We take pride in our work, and our clients' satisfaction is our greatest reward.
+                        </p>
+                    </div>
+                </FadeIn>
                 <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <figure key={index} className="bg-brand-bg border border-gray-200 p-6 sm:p-8 rounded-lg shadow-lg transform transition-transform hover:-translate-y-2 flex flex-col">
-                            <blockquote className="flex-grow">
-                               <p className="text-brand-slate-gray mb-6">"{testimonial.quote}"</p>
-                            </blockquote>
-                            <figcaption className="text-right">
-                                <p className="font-bold font-display text-brand-oxford-blue">{testimonial.name}</p>
-                                <p className="text-sm text-brand-slate-gray">{testimonial.location}</p>
-                            </figcaption>
-                        </figure>
+                        <FadeIn key={index} delay={index * 150}>
+                            <figure className="bg-brand-bg border border-gray-200 p-6 sm:p-8 rounded-lg shadow-lg transform transition-transform hover:-translate-y-2 flex flex-col h-full">
+                                <blockquote className="flex-grow">
+                                <p className="text-brand-slate-gray mb-6">"{testimonial.quote}"</p>
+                                </blockquote>
+                                <figcaption className="text-right">
+                                    <p className="font-bold font-display text-brand-oxford-blue">{testimonial.name}</p>
+                                    <p className="text-sm text-brand-slate-gray">{testimonial.location}</p>
+                                </figcaption>
+                            </figure>
+                        </FadeIn>
                     ))}
                 </div>
             </div>
