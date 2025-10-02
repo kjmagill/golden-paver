@@ -16,11 +16,28 @@ const Header: React.FC = () => {
     { href: '#testimonials', label: 'Testimonials' },
     { href: '#contact', label: 'Contact Us' },
   ];
+  
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute('href');
+    if (href?.startsWith('#')) {
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const QuoteButton = ({ isMobile = false }: { isMobile?: boolean }) => (
     <a 
       href="#contact" 
-      onClick={() => isMobile && setIsOpen(false)}
+      onClick={(e) => {
+        handleSmoothScroll(e);
+        if (isMobile) {
+          setIsOpen(false);
+        }
+      }}
       className={`group inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-oxford-blue font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
     >
       <span>Get a Free Quote</span>
@@ -41,7 +58,7 @@ const Header: React.FC = () => {
         </a>
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
+            <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
               {link.label}
             </a>
           ))}
@@ -69,7 +86,10 @@ const Header: React.FC = () => {
         <div className="md:hidden bg-brand-oxford-blue" id="mobile-menu">
           <nav className="px-6 pt-2 pb-4 flex flex-col items-center space-y-2">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold block text-center py-2" onClick={() => setIsOpen(false)}>
+              <a key={link.href} href={link.href} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold block text-center py-2" onClick={(e) => {
+                handleSmoothScroll(e);
+                setIsOpen(false);
+              }}>
                 {link.label}
               </a>
             ))}

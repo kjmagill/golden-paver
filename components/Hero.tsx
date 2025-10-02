@@ -14,6 +14,13 @@ const Hero: React.FC = () => {
           </p>
           <a 
             href="#contact" 
+            onClick={(e) => {
+              e.preventDefault();
+              const targetElement = document.getElementById('contact');
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="group inline-flex items-center justify-center gap-3 bg-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl text-lg transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold"
           >
             <span>Request Your Free Estimate</span>
