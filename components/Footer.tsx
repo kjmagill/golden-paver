@@ -3,7 +3,7 @@ import React from 'react';
 const socialLinks = {
   facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://www.goldenpaverrestorations.com/')}`,
   x: `https://twitter.com/intent/tweet?url=${encodeURIComponent('https://www.goldenpaverrestorations.com/')}&text=${encodeURIComponent('Check out the amazing paver restoration work by Golden Paver Restorations!')}`,
-  pinterest: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.goldenpaverrestorations.com/')}&media=${encodeURIComponent('https://i.postimg.cc/yxn2B8mg/f1.jpg')}&description=${encodeURIComponent('Check out the amazing paver restoration work by Golden Paver Restorations!')}`,
+  pinterest: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent('https://www.goldenpaverrestorations.com/')}&media=${encodeURIComponent('https://i.postimg.cc/3RxRYdp2/j2.jpg')}&description=${encodeURIComponent('Check out the amazing paver restoration work by Golden Paver Restorations!')}`,
   linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent('https://www.goldenpaverrestorations.com/')}`,
   email: `mailto:?subject=${encodeURIComponent('Check Out Golden Paver Restorations')}&body=${encodeURIComponent('I found this great paver restoration company, check out their work: https://www.goldenpaverrestorations.com/')}`
 };

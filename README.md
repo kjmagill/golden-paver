@@ -6,7 +6,7 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-[![Website Screenshot](https://i.postimg.cc/yxn2B8mg/f1.jpg)](https://www.goldenpaverrestorations.com/)
+[![Website Screenshot](https://i.postimg.cc/3RxRYdp2/j2.jpg)](https://www.goldenpaverrestorations.com/)
 
 > This project is a single-page marketing website designed to showcase the company's services, display a gallery of their work, build trust through testimonials, and capture leads via a contact form.
 
