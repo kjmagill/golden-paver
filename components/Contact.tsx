@@ -21,7 +21,7 @@ const serviceOptions = [
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({ name: '', address: '', phone: '', service: '', message: '' });
-  // `status` tracks the current state of the form, used to show different UI elements (form, loading, success message).
+  // `status` tracks the current state of the form, used to show different UI elements (form, loading, success/error message).
   const [status, setStatus] = useState<FormStatus>('idle');
   // `errors` holds validation error messages for each field.
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -47,20 +47,84 @@ const Contact: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) {
       return;
     }
     setStatus('submitting');
-    // In a real application, this is where you would make an API call to a backend server.
-    // Here, we simulate the network request with a timeout.
-    setTimeout(() => {
-      console.log('Form Submitted:', formData);
+    setErrors({});
+
+    // The backend endpoint that will receive the form data and send the SMS.
+    const endpoint = '/api/send-sms';
+
+    // The data payload that will be sent to the backend.
+    const payload = {
+      ...formData,
+      // The backend will send the SMS to these recipients.
+      recipients: ['609-408-5000', '609-780-0536'],
+    };
+
+    try {
+      // In a real application, this fetch request sends the data to your server.
+      // The server would then use a service like Twilio to send the SMS.
+      // We will simulate this call for now as we don't have a live backend.
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulating network delay
+
+      // To make this a real call, you would replace the simulation with:
+      /*
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      */
+
+      console.log('Form Submitted:', payload);
       setStatus('success');
       // Reset the form fields after successful submission.
       setFormData({ name: '', address: '', phone: '', service: '', message: '' });
-    }, 1500);
+
+    } catch (error) {
+      console.error('Submission failed:', error);
+      setStatus('error');
+    }
+  };
+  
+  const resetForm = () => {
+    setStatus('idle');
+  }
+
+  const renderStatusMessage = () => {
+    if (status === 'success') {
+      return (
+        <div className="text-center py-10" role="alert" aria-live="polite">
+          <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
+          <p className="mb-6">Your request has been submitted successfully. We will be in touch within 24 hours.</p>
+          <button onClick={resetForm} className="bg-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:bg-brand-gold-light transition-colors">
+            Send Another Message
+          </button>
+        </div>
+      );
+    }
+    if (status === 'error') {
+       return (
+        <div className="text-center py-10" role="alert" aria-live="assertive">
+          <h3 className="text-2xl font-bold mb-2 text-red-600">Submission Failed</h3>
+          <p className="mb-6">We're sorry, but something went wrong. Please try again later or give us a call.</p>
+           <button onClick={resetForm} className="bg-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:bg-brand-gold-light transition-colors">
+            Try Again
+          </button>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -82,13 +146,7 @@ const Contact: React.FC = () => {
         </FadeIn>
         <FadeIn delay={150}>
           <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-6 sm:p-8 rounded-lg shadow-2xl">
-            {status === 'success' ? (
-              // Success message shown after the form is submitted.
-              <div className="text-center py-10" role="alert" aria-live="assertive">
-                <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
-                <p>Your request has been submitted successfully. We will be in touch within 24 hours.</p>
-              </div>
-            ) : (
+            {status === 'success' || status === 'error' ? renderStatusMessage() : (
               // The form itself.
               <form onSubmit={handleSubmit} noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
