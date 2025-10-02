@@ -63,10 +63,10 @@ const Header: React.FC = () => {
         <a href="index.html" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light hover:text-brand-gold transition-colors">
           <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
           <span className="font-brand font-bold text-base sm:text-xl tracking-wider uppercase leading-tight">
-            Golden Paver<span className="hidden sm:inline"> Restoration</span>
+            Golden Paver<span className="hidden sm:inline"> Restorations</span>
           </span>
         </a>
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden lg:flex items-center space-x-6">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
               {link.label}
@@ -78,7 +78,7 @@ const Header: React.FC = () => {
           </a>
           <QuoteButton />
         </nav>
-        <div className="md:hidden">
+        <div className="lg:hidden">
           {/* Hamburger menu button */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
@@ -95,7 +95,7 @@ const Header: React.FC = () => {
       </div>
       {/* Mobile menu, rendered conditionally based on the `isOpen` state. */}
       {isOpen && (
-        <div className="md:hidden bg-brand-oxford-blue" id="mobile-menu">
+        <div className="lg:hidden bg-brand-oxford-blue" id="mobile-menu">
           <nav className="px-6 pt-2 pb-4 flex flex-col items-center space-y-2">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold block text-center py-2" onClick={(e) => {

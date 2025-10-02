@@ -5,9 +5,9 @@ import FadeIn from './FadeIn';
 const Hero: React.FC = () => {
   return (
     <section id="home" className="bg-brand-oxford-blue text-white py-16 sm:py-20 md:py-28 overflow-x-hidden">
-      <div className="container mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <FadeIn direction="right">
-          <div className="text-center md:text-left">
+          <div className="text-center lg:text-left">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display leading-tight mb-4">
               The <span className="text-brand-gold-light">Golden Standard</span> in Paver Restoration
             </h1>
