@@ -81,4 +81,4 @@ const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, direction = 'up', 
   );
 };
 
-export default FadeIn;
+export default React.memo(FadeIn);

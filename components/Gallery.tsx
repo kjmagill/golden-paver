@@ -3,9 +3,27 @@ import BeforeAfterSlider from './BeforeAfterSlider';
 import FadeIn from './FadeIn';
 
 const galleryItems = [
-  { before: 'https://i.postimg.cc/Wp7B0XQC/f2.jpg', after: 'https://i.postimg.cc/yxn2B8mg/f1.jpg', title: 'Patio Transformation' },
-  { before: 'https://i.postimg.cc/3RxRYdp2/j2.jpg', after: 'https://i.postimg.cc/9MQMCrTr/j1.jpg', title: 'Driveway Revival' },
-  { before: 'https://i.postimg.cc/YCSLtDHB/h2.jpg', after: 'https://i.postimg.cc/rFMtPFZh/h1.jpg', title: 'Walkway Restoration' },
+  { 
+    before: 'https://i.postimg.cc/Wp7B0XQC/f2.jpg', 
+    after: 'https://i.postimg.cc/yxn2B8mg/f1.jpg', 
+    title: 'Patio Transformation',
+    beforeAlt: 'A grimy, moss-covered brick paver patio before professional pressure washing and restoration.',
+    afterAlt: 'A beautifully clean and vibrant brick paver patio after sealing service in Stone Harbor, NJ.'
+  },
+  { 
+    before: 'https://i.postimg.cc/3RxRYdp2/j2.jpg', 
+    after: 'https://i.postimg.cc/9MQMCrTr/j1.jpg', 
+    title: 'Driveway Revival',
+    beforeAlt: 'A faded and stained paver driveway with weeds growing in the joints before restoration.',
+    afterAlt: 'A revived paver driveway with rich color and clean joint lines after polymeric sanding and sealing.'
+  },
+  { 
+    before: 'https://i.postimg.cc/YCSLtDHB/h2.jpg', 
+    after: 'https://i.postimg.cc/rFMtPFZh/h1.jpg', 
+    title: 'Walkway Restoration',
+    beforeAlt: 'An old paver walkway, discolored and covered in dirt before cleaning services.',
+    afterAlt: 'A pristine and welcoming paver walkway, looking brand new after a deep clean and seal restoration.'
+  },
 ];
 
 const Gallery: React.FC = () => {
@@ -27,8 +45,9 @@ const Gallery: React.FC = () => {
                 <BeforeAfterSlider 
                   before={item.before} 
                   after={item.after}
-                  beforeAlt={`Before: ${item.title}`}
-                  afterAlt={`After: ${item.title}`}
+                  beforeAlt={item.beforeAlt}
+                  afterAlt={item.afterAlt}
+                  loading="lazy"
                 />
                 <h3 className="text-xl sm:text-2xl font-bold font-display text-brand-oxford-blue mt-4">{item.title}</h3>
               </div>

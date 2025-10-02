@@ -6,7 +6,7 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-[![Website Screenshot](https://i.postimg.cc/3RxRYdp2/j2.jpg)](https://www.goldenpaverrestorations.com/)
+[![Website Screenshot](https://i.postimg.cc/yxn2B8mg/f1.jpg)](https://www.goldenpaverrestorations.com/)
 
 > This project is a single-page marketing website designed to showcase the company's services, display a gallery of their work, build trust through testimonials, and capture leads via a contact form.
 
@@ -23,6 +23,11 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 ## Key Features
 
 - **Fully Responsive Design:** A seamless experience across desktops, tablets, and mobile devices.
+- **Performance Optimized:** Engineered for a fast user experience with techniques like:
+    - **Prioritized Loading:** Critical above-the-fold imagery is preloaded for rapid initial rendering (Improved LCP).
+    - **Lazy Loading:** Off-screen gallery images are loaded on-demand as the user scrolls.
+    - **Layout Shift Prevention:** Images have explicit dimensions to prevent content jumping during load (Improved CLS).
+    - **Efficient Rendering:** React components are memoized to prevent unnecessary re-renders.
 - **Interactive Before & After Sliders:** A powerful visual tool to demonstrate the quality and impact of the restoration services.
 - **Dynamic Components:** Built with React for a modular, maintainable, and interactive user interface.
 - **Accessible UI:** Designed with accessibility in mind, incorporating ARIA roles, semantic HTML, and keyboard navigation support.
@@ -74,6 +79,7 @@ The project is organized into modular components for easy maintenance and scalab
 ├── components/
 │   ├── BeforeAfterSlider.tsx
 │   ├── Contact.tsx
+│   ├── FadeIn.tsx
 │   ├── Footer.tsx
 │   ├── Gallery.tsx
 │   ├── Header.tsx

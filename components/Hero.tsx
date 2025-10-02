@@ -37,8 +37,10 @@ const Hero: React.FC = () => {
             <BeforeAfterSlider 
                 before="https://i.postimg.cc/76fBFnBV/d2.jpg"
                 after="https://i.postimg.cc/vBcPJtPn/d1.jpg"
-                beforeAlt="Driveway with dirty, weed-filled pavers before restoration."
-                afterAlt="Same driveway with clean, freshly sealed pavers and new sand after restoration."
+                beforeAlt="Dirty and faded driveway pavers with weeds, before restoration by Golden Paver Restorations."
+                afterAlt="Beautifully restored driveway with clean, vibrant pavers and fresh polymeric sand after paver sealing service."
+                loading="eager"
+                fetchpriority="high"
             />
           </div>
         </FadeIn>

@@ -5,13 +5,18 @@ interface BeforeAfterSliderProps {
   after: string;
   beforeAlt?: string;
   afterAlt?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
 }
 
 const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ 
   before, 
   after, 
   beforeAlt = 'Before restoration', 
-  afterAlt = 'After restoration' 
+  afterAlt = 'After restoration',
+  // FIX: The default value for 'loading' was 'auto', which is not a valid type for the <img> loading attribute. Changed to 'lazy' as a sensible default.
+  loading = 'lazy',
+  fetchpriority = 'auto'
 }) => {
   // `sliderPosition` stores the handle's position as a percentage (0-100).
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -97,7 +102,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       aria-label="Before and after image comparison slider"
     >
       {/* Before Image (bottom layer) */}
-      <img src={before} alt={beforeAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" />
+      <img src={before} alt={beforeAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" loading={loading} decoding="async" fetchPriority={fetchpriority} width="800" height="600" />
       
       {/* After Image Container (top layer, clipped) */}
       <div 
@@ -106,7 +111,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         // It defines a rectangular clipping mask that is resized based on the slider's position.
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <img src={after} alt={afterAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" />
+        <img src={after} alt={afterAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" loading={loading} decoding="async" fetchPriority={fetchpriority} width="800" height="600" />
       </div>
       
       {/* Slider Handle */}

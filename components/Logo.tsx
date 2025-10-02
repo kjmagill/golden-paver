@@ -56,4 +56,4 @@ const Logo: React.FC<{ className?: string }> = ({ className }) => {
   );
 };
 
-export default Logo;
+export default React.memo(Logo);
