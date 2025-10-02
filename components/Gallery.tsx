@@ -20,7 +20,12 @@ const Gallery: React.FC = () => {
         <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-12">
           {galleryItems.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
-              <BeforeAfterSlider before={item.before} after={item.after} />
+              <BeforeAfterSlider 
+                before={item.before} 
+                after={item.after}
+                beforeAlt={`Before: ${item.title}`}
+                afterAlt={`After: ${item.title}`}
+              />
               <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mt-4">{item.title}</h3>
             </div>
           ))}

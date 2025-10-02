@@ -30,13 +30,15 @@ const Testimonials: React.FC = () => {
                 </div>
                 <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
                     {testimonials.map((testimonial, index) => (
-                        <div key={index} className="bg-brand-bg border border-gray-200 p-8 rounded-lg shadow-lg transform transition-transform hover:-translate-y-2">
-                            <p className="text-brand-slate-gray mb-6">"{testimonial.quote}"</p>
-                            <div className="text-right">
+                        <figure key={index} className="bg-brand-bg border border-gray-200 p-8 rounded-lg shadow-lg transform transition-transform hover:-translate-y-2 flex flex-col">
+                            <blockquote className="flex-grow">
+                               <p className="text-brand-slate-gray mb-6">"{testimonial.quote}"</p>
+                            </blockquote>
+                            <figcaption className="text-right">
                                 <p className="font-bold font-display text-brand-oxford-blue">{testimonial.name}</p>
                                 <p className="text-sm text-brand-slate-gray">{testimonial.location}</p>
-                            </div>
-                        </div>
+                            </figcaption>
+                        </figure>
                     ))}
                 </div>
             </div>

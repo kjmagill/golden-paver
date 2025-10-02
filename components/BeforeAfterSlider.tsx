@@ -3,9 +3,16 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 interface BeforeAfterSliderProps {
   before: string;
   after: string;
+  beforeAlt?: string;
+  afterAlt?: string;
 }
 
-const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, after }) => {
+const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ 
+  before, 
+  after, 
+  beforeAlt = 'Before restoration', 
+  afterAlt = 'After restoration' 
+}) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -77,14 +84,14 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, after }) 
       aria-label="Before and after image comparison slider"
     >
       {/* Before Image */}
-      <img src={before} alt="Before" className="absolute inset-0 w-full h-full object-cover" draggable="false" />
+      <img src={before} alt={beforeAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" />
       
       {/* After Image Container (clipped) */}
       <div 
         className="absolute inset-0 w-full h-full overflow-hidden" 
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" draggable="false" />
+        <img src={after} alt={afterAlt} className="absolute inset-0 w-full h-full object-cover" draggable="false" />
       </div>
       
       {/* Slider Handle */}
@@ -99,15 +106,15 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ before, after }) 
         role="presentation" // The main container has the slider role
       >
         <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-10 w-10 flex items-center justify-center shadow-lg border-2 border-white/50 transition-all duration-300 group-hover:scale-110 group-hover:border-brand-gold group-focus:scale-110 group-focus:border-brand-gold">
-          <svg className="w-6 h-6 text-brand-oxford-blue/80 transition-colors duration-300 group-hover:text-brand-oxford-blue group-focus:text-brand-oxford-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-6 h-6 text-brand-oxford-blue/80 transition-colors duration-300 group-hover:text-brand-oxford-blue group-focus:text-brand-oxford-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
           </svg>
         </div>
       </div>
        
        {/* Labels */}
-       <div className="absolute top-3 left-3 bg-brand-oxford-blue bg-opacity-70 text-white text-xs font-bold px-3 py-1.5 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0 focus-within:opacity-0">BEFORE</div>
-       <div className="absolute top-3 right-3 bg-brand-oxford-blue bg-opacity-70 text-white text-xs font-bold px-3 py-1.5 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0 focus-within:opacity-0">AFTER</div>
+       <div aria-hidden="true" className="absolute top-3 left-3 bg-brand-oxford-blue bg-opacity-70 text-white text-xs font-bold px-3 py-1.5 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0 focus-within:opacity-0">BEFORE</div>
+       <div aria-hidden="true" className="absolute top-3 right-3 bg-brand-oxford-blue bg-opacity-70 text-white text-xs font-bold px-3 py-1.5 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 opacity-100 group-hover:opacity-0 focus-within:opacity-0">AFTER</div>
     </div>
   );
 };
