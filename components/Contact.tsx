@@ -8,11 +8,19 @@ interface FormData {
     name: string;
     address: string;
     phone: string;
+    service: string; // New field for service type
     message: string;
 }
 
+const serviceOptions = [
+  'Cleaning & Sealing',
+  'Polymeric Sanding',
+  'Repair & Restoration',
+  'Other / Not Sure'
+];
+
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({ name: '', address: '', phone: '', message: '' });
+  const [formData, setFormData] = useState<FormData>({ name: '', address: '', phone: '', service: '', message: '' });
   // `status` tracks the current state of the form, used to show different UI elements (form, loading, success message).
   const [status, setStatus] = useState<FormStatus>('idle');
   // `errors` holds validation error messages for each field.
@@ -32,6 +40,7 @@ const Contact: React.FC = () => {
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.address.trim()) newErrors.address = 'Address is required';
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.service) newErrors.service = 'Please select a service';
     if (!formData.message.trim()) newErrors.message = 'Message is required';
     setErrors(newErrors);
     // The form is valid if the errors object has no keys.
@@ -50,7 +59,7 @@ const Contact: React.FC = () => {
       console.log('Form Submitted:', formData);
       setStatus('success');
       // Reset the form fields after successful submission.
-      setFormData({ name: '', address: '', phone: '', message: '' });
+      setFormData({ name: '', address: '', phone: '', service: '', message: '' });
     }, 1500);
   };
 
@@ -98,6 +107,34 @@ const Contact: React.FC = () => {
                   <label htmlFor="address" className="block text-sm font-bold mb-2">Service Address</label>
                   <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.address ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.address} aria-describedby={errors.address ? "address-error" : undefined} />
                   {errors.address && <p id="address-error" className="text-red-500 text-xs mt-1">{errors.address}</p>}
+                </div>
+                {/* Service Type Selection */}
+                <div className="mb-6">
+                   <fieldset aria-describedby={errors.service ? "service-error" : undefined}>
+                    <legend className="block text-sm font-bold mb-2">Service of Interest</legend>
+                    <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                      {serviceOptions.map((option) => {
+                        const optionId = option.replace(/[\s/&]+/g, '-').toLowerCase();
+                        return (
+                          <div key={option} className="flex items-center">
+                            <input
+                              type="radio"
+                              id={optionId}
+                              name="service"
+                              value={option}
+                              checked={formData.service === option}
+                              onChange={handleChange}
+                              className="h-4 w-4 text-brand-gold focus:ring-brand-powder-blue border-gray-300"
+                            />
+                            <label htmlFor={optionId} className="ml-3 block text-sm text-gray-800">
+                              {option}
+                            </label>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+                  {errors.service && <p id="service-error" className="text-red-500 text-xs mt-2">{errors.service}</p>}
                 </div>
                 <div className="mb-6">
                   <label htmlFor="message" className="block text-sm font-bold mb-2">Tell Us About Your Project</label>
