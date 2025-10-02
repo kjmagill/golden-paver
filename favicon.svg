@@ -1,19 +1,24 @@
 <!-- 
-  This favicon has been optimized for sharpness at small sizes (e.g., 16x16).
-  - A solid background rectangle provides high contrast and a defined shape.
-  - Gaps are intentionally placed between the "paver" rectangles. This is crucial to prevent them
-    from merging into a blurry blob at small resolutions, ensuring the logo shape remains distinct.
-  - `shape-rendering="geometricPrecision"` hints to the browser to prioritize sharpness.
+  This favicon SVG has been re-engineered for maximum clarity and browser compatibility.
+  - The viewBox is enlarged to 120x120 to easily create a padded margin around the logo.
+  - The logo shapes have been manually resized to create larger gaps (5 units vs. 3 units).
+    This is critical for small sizes (16x16px), as it prevents the shapes from visually merging
+    into a blurry blob, ensuring the logo's structure remains legible.
+  - Complex transforms like `scale()` have been removed in favor of a simple `translate()`
+    to improve rendering reliability.
 -->
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
-  <rect width="100" height="100" rx="16" fill="#111F3A"/>
-  <!-- The logo is scaled and centered. Using the original geometry with gaps for clarity. -->
-  <g transform="translate(5, 5) scale(0.9)" fill="#CA9703">
-    <rect x="0" y="0" width="27" height="27" rx="3" />
-    <rect x="30" y="0" width="70" height="27" rx="3" />
-    <rect x="0" y="30" width="58" height="32" rx="3" />
-    <rect x="61" y="30" width="39" height="70" rx="3" />
-    <rect x="0" y="65" width="27" height="35" rx="3" />
-    <rect x="30" y="65" width="28" height="35" rx="3" />
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- A dark blue background with rounded corners, filling the entire icon space. -->
+  <rect width="120" height="120" rx="20" fill="#111F3A"/>
+  
+  <!-- The logo group is translated to create a 10px visual margin inside the icon. -->
+  <g transform="translate(10, 10)" fill="#CA9703">
+    <!-- Paver shapes with exaggerated gaps for clarity at small sizes -->
+    <rect x="1" y="1" width="25" height="25" rx="3" />
+    <rect x="31" y="1" width="68" height="25" rx="3" />
+    <rect x="1" y="31" width="56" height="30" rx="3" />
+    <rect x="62" y="31" width="37" height="68" rx="3" />
+    <rect x="1" y="66" width="25" height="33" rx="3" />
+    <rect x="31" y="66" width="26" height="33" rx="3" />
   </g>
 </svg>
