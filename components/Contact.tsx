@@ -44,10 +44,10 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-brand-oxford-blue text-brand-powder-blue">
+    <section id="contact" className="py-16 sm:py-20 bg-brand-oxford-blue text-brand-powder-blue">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold font-display text-white">Ready to Transform Your Space?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold font-display text-white">Ready to Transform Your Space?</h2>
           <div className="max-w-3xl mx-auto">
             <p className="text-lg text-brand-powder-blue mt-4">
               Fill out the form below for a free, no-obligation estimate. One of our owners will get back to you within 24 hours.
@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-8 rounded-lg shadow-2xl">
+        <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-6 sm:p-8 rounded-lg shadow-2xl">
           {status === 'success' ? (
             <div className="text-center py-10" role="alert" aria-live="assertive">
               <h3 className="text-2xl font-bold mb-2">Thank You!</h3>

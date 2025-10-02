@@ -9,15 +9,15 @@ const galleryItems = [
 
 const Gallery: React.FC = () => {
   return (
-    <section id="gallery" className="py-20 bg-brand-bg">
+    <section id="gallery" className="py-16 sm:py-20 bg-brand-bg">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold font-display text-brand-oxford-blue">Our Work in Action</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">Our Work in Action</h2>
           <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
             See the dramatic difference our professional restoration can make.
           </p>
         </div>
-        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-10 sm:gap-12">
           {galleryItems.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
               <BeforeAfterSlider 
@@ -26,7 +26,7 @@ const Gallery: React.FC = () => {
                 beforeAlt={`Before: ${item.title}`}
                 afterAlt={`After: ${item.title}`}
               />
-              <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mt-4">{item.title}</h3>
+              <h3 className="text-xl sm:text-2xl font-bold font-display text-brand-oxford-blue mt-4">{item.title}</h3>
             </div>
           ))}
         </div>

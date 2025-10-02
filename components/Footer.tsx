@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
           </a>
         </div>
         <p>&copy; {new Date().getFullYear()} Golden Paver Restorations. All Rights Reserved.</p>
-        <p className="text-sm text-brand-slate-gray mt-1 flex items-center justify-center space-x-1.5">
+        <p className="text-sm text-brand-slate-gray mt-1 flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1">
             <span>Made with</span>
             <img 
               className="emoji" 

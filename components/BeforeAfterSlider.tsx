@@ -105,8 +105,8 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         tabIndex={0}
         role="presentation" // The main container has the slider role
       >
-        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-10 w-10 flex items-center justify-center shadow-lg border-2 border-white/50 transition-all duration-300 group-hover:scale-110 group-hover:border-brand-gold group-focus:scale-110 group-focus:border-brand-gold">
-          <svg className="w-6 h-6 text-brand-oxford-blue/80 transition-colors duration-300 group-hover:text-brand-oxford-blue group-focus:text-brand-oxford-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center shadow-lg border-2 border-white/50 transition-all duration-300 group-hover:scale-110 group-hover:border-brand-gold group-focus:scale-110 group-focus:border-brand-gold">
+          <svg className="w-5 h-5 sm:w-6 sm:w-6 text-brand-oxford-blue/80 transition-colors duration-300 group-hover:text-brand-oxford-blue group-focus:text-brand-oxford-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
           </svg>
         </div>

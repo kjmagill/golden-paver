@@ -3,10 +3,10 @@ import BeforeAfterSlider from './BeforeAfterSlider';
 
 const Hero: React.FC = () => {
   return (
-    <section id="home" className="bg-brand-oxford-blue text-white py-20 md:py-32">
-      <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    <section id="home" className="bg-brand-oxford-blue text-white py-16 sm:py-20 md:py-28">
+      <div className="container mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
         <div className="text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl font-extrabold font-display leading-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-display leading-tight mb-4">
             The <span className="text-brand-gold-light">Golden Standard</span> in Paver Restoration
           </h1>
           <p className="text-lg md:text-xl text-brand-powder-blue mb-8">

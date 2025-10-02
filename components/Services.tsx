@@ -39,17 +39,17 @@ const services = [
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-20 bg-brand-bg">
+    <section id="services" className="py-16 sm:py-20 bg-brand-bg">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold font-display text-brand-oxford-blue">Our Services</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">Our Services</h2>
           <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to make your hardscapes look brand new.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-white p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2 group">
+            <div key={index} className="bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2 group">
               <div className="flex justify-center mb-6 transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:-rotate-6">{service.icon}</div>
               <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-2">{service.title}</h3>
               <p className="text-brand-slate-gray">{service.description}</p>
