@@ -2,10 +2,10 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-blue-dark border-t border-brand-blue">
-      <div className="container mx-auto px-6 py-6 text-center text-brand-cream">
+    <footer className="bg-brand-oxford-blue border-t border-brand-slate-gray/30">
+      <div className="container mx-auto px-6 py-6 text-center text-brand-powder-blue">
         <p>&copy; {new Date().getFullYear()} Golden Paver Restorations. All Rights Reserved.</p>
-        <p className="text-sm text-brand-blue-light mt-1 flex items-center justify-center space-x-1.5">
+        <p className="text-sm text-brand-slate-gray mt-1 flex items-center justify-center space-x-1.5">
             <span>Made with</span>
             <img 
               className="emoji" 

@@ -13,10 +13,9 @@ const ShieldCheckIcon = () => (
     </svg>
 );
 
-const WrenchScrewdriverIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 01-9-9 9 9 0 019-9m9 9a9 9 0 01-9 9M9 9l6 6m0-6l-6 6" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.904 4.096l4.001 4.001-4.001 4.001m-11.808-8.002l-4.001 4.001 4.001 4.001" />
+const RepairIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.87-5.87m0 0L11.42 15.17m5.87-5.87L11.42 3.5l-5.87 5.87m5.87 5.87-5.87-5.87" />
     </svg>
 );
 
@@ -33,7 +32,7 @@ const services = [
     description: 'We replace old joint sand with new polymeric sand to prevent weed growth, resist erosion, and lock your pavers in place.'
   },
   {
-    icon: <WrenchScrewdriverIcon />,
+    icon: <RepairIcon />,
     title: 'Repair & Restoration',
     description: 'Lifting and re-leveling sunken pavers, replacing broken ones, and restoring the structural integrity of your pavement.'
   },
@@ -41,20 +40,20 @@ const services = [
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-20 bg-white">
+    <section id="services" className="py-20 bg-brand-bg">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold font-display text-brand-blue-dark">Our Services</h2>
-          <p className="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold font-display text-brand-oxford-blue">Our Services</h2>
+          <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to make your hardscapes look brand new.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-brand-cream p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2">
+            <div key={index} className="bg-white p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2">
               <div className="flex justify-center mb-4">{service.icon}</div>
-              <h3 className="text-2xl font-bold font-display text-brand-blue-dark mb-2">{service.title}</h3>
-              <p className="text-brand-blue-dark">{service.description}</p>
+              <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-2">{service.title}</h3>
+              <p className="text-brand-slate-gray">{service.description}</p>
             </div>
           ))}
         </div>
