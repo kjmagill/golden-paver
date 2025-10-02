@@ -33,7 +33,7 @@ const Header: React.FC = () => {
   return (
     <header className="bg-brand-oxford-blue sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" className="flex items-center gap-3 text-2xl font-bold font-display text-brand-gold-light hover:text-brand-gold transition-colors">
+        <a href="#" className="flex items-center gap-3 text-lg sm:text-xl md:text-2xl font-bold font-display text-brand-gold-light hover:text-brand-gold transition-colors">
           <Logo className="w-10 h-10" />
           <span>Golden Paver Restorations</span>
         </a>

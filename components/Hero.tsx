@@ -1,4 +1,3 @@
-
 import React from 'react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 
@@ -8,7 +7,7 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold font-display leading-tight mb-4">
-            Restore Your Pavers to Their <span className="text-brand-gold-light">Golden Glory</span>
+            The <span className="text-brand-gold-light">Golden Standard</span> in Paver Restoration
           </h1>
           <p className="text-lg md:text-xl text-brand-powder-blue mb-8">
             Professional cleaning, sealing, and restoration services that bring your outdoor spaces back to life.

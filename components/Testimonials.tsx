@@ -4,17 +4,17 @@ const testimonials = [
     {
         quote: "Golden Paver Restorations completely transformed our backyard patio. It looks brand new! The team was professional, efficient, and the results exceeded our expectations.",
         name: "Sarah & Tom L.",
-        location: "Avalon"
+        location: "Avalon, NJ"
     },
     {
         quote: "Our driveway was faded and full of weeds. After their restoration service, the color is vibrant again and the polymeric sand has kept it weed-free. Highly recommend!",
         name: "Michael B.",
-        location: "Wildwood Crest"
+        location: "Wildwood Crest, NJ"
     },
     {
         quote: "I was considering replacing my entire walkway, but they restored it for a fraction of the cost. The quality of work is outstanding. Thank you!",
         name: "Jennifer P.",
-        location: "W. Cape May"
+        location: "W. Cape May, NJ"
     }
 ];
 
