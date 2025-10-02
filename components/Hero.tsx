@@ -13,14 +13,20 @@ const Hero: React.FC = () => {
           <p className="text-lg md:text-xl text-brand-powder-blue mb-8">
             Professional cleaning, sealing, and restoration services that bring your outdoor spaces back to life.
           </p>
-          <a href="#contact" className="bg-brand-gold hover:bg-brand-gold-light text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-transform transform hover:scale-105 inline-block text-lg">
-            Request Your Free Estimate
+          <a 
+            href="#contact" 
+            className="group inline-flex items-center justify-center gap-3 bg-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl text-lg transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold"
+          >
+            <span>Request Your Free Estimate</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
           </a>
         </div>
         <div className="w-full max-w-2xl mx-auto">
            <BeforeAfterSlider 
-              before="https://picsum.photos/seed/paverbefore/800/600"
-              after="https://picsum.photos/seed/paverafter/800/600"
+              before="https://i.postimg.cc/76fBFnBV/d2.jpg"
+              after="https://i.postimg.cc/vBcPJtPn/d1.jpg"
            />
         </div>
       </div>

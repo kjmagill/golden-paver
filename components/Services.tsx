@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const BrushIcon = () => (
@@ -50,8 +49,8 @@ const Services: React.FC = () => {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-white p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2">
-              <div className="flex justify-center mb-4">{service.icon}</div>
+            <div key={index} className="bg-white p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2 group">
+              <div className="flex justify-center mb-6 transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:-rotate-6">{service.icon}</div>
               <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-2">{service.title}</h3>
               <p className="text-brand-slate-gray">{service.description}</p>
             </div>

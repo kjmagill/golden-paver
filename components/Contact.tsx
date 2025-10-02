@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -49,9 +48,15 @@ const Contact: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold font-display text-white">Ready to Transform Your Space?</h2>
-          <p className="text-lg text-brand-powder-blue mt-4 max-w-2xl mx-auto">
-            Fill out the form below for a free, no-obligation estimate. One of our owners will call you back within 24 hours.
-          </p>
+          <div className="max-w-3xl mx-auto">
+            <p className="text-lg text-brand-powder-blue mt-4">
+              Fill out the form below for a free, no-obligation estimate. One of our owners will get back to you within 24 hours.
+            </p>
+            <p className="text-lg text-brand-powder-blue mt-2">
+              Prefer to talk? Call us for an even faster response: 
+              <a href="tel:609-408-5000" className="font-bold text-white hover:text-brand-gold-light transition-colors whitespace-nowrap"> 609-408-5000</a>
+            </p>
+          </div>
         </div>
         <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-8 rounded-lg shadow-2xl">
           {status === 'success' ? (
@@ -84,8 +89,17 @@ const Contact: React.FC = () => {
                 {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
               </div>
               <div className="text-center">
-                <button type="submit" disabled={status === 'submitting'} className="w-full bg-brand-gold hover:bg-brand-gold-light text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-transform transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed">
-                  {status === 'submitting' ? 'Sending...' : 'Submit Request'}
+                <button 
+                  type="submit" 
+                  disabled={status === 'submitting'} 
+                  className="w-full group inline-flex items-center justify-center gap-3 bg-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-brand-gold disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+                >
+                  <span>{status === 'submitting' ? 'Sending...' : 'Submit Request'}</span>
+                  {status !== 'submitting' && (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  )}
                 </button>
               </div>
             </form>

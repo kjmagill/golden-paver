@@ -1,11 +1,10 @@
-
 import React from 'react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 
 const galleryItems = [
-  { before: 'https://picsum.photos/seed/patiobefore/800/600', after: 'https://picsum.photos/seed/patioafter/800/600', title: 'Patio Transformation' },
-  { before: 'https://picsum.photos/seed/drivewaybefore/800/600', after: 'https://picsum.photos/seed/drivewayafter/800/600', title: 'Driveway Revival' },
-  { before: 'https://picsum.photos/seed/walkwaybefore/800/600', after: 'https://picsum.photos/seed/walkwayafter/800/600', title: 'Walkway Restoration' },
+  { before: 'https://i.postimg.cc/Wp7B0XQC/f2.jpg', after: 'https://i.postimg.cc/yxn2B8mg/f1.jpg', title: 'Patio Transformation' },
+  { before: 'https://i.postimg.cc/3RxRYdp2/j2.jpg', after: 'https://i.postimg.cc/9MQMCrTr/j1.jpg', title: 'Driveway Revival' },
+  { before: 'https://i.postimg.cc/YCSLtDHB/h2.jpg', after: 'https://i.postimg.cc/rFMtPFZh/h1.jpg', title: 'Walkway Restoration' },
 ];
 
 const Gallery: React.FC = () => {
