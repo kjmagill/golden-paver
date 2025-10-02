@@ -33,9 +33,11 @@ const Header: React.FC = () => {
   return (
     <header className="bg-brand-oxford-blue sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" className="flex items-center gap-3 text-lg sm:text-xl md:text-2xl font-bold font-display text-brand-gold-light hover:text-brand-gold transition-colors">
-          <Logo className="w-10 h-10" />
-          <span>Golden Paver Restorations</span>
+        <a href="index.html" className="flex items-center gap-3 text-brand-gold-light hover:text-brand-gold transition-colors">
+          <Logo className="w-9 h-9" />
+          <span className="font-brand font-bold text-xl tracking-wider uppercase whitespace-nowrap">
+            Golden Paver Restoration
+          </span>
         </a>
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
