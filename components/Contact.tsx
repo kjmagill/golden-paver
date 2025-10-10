@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
 
     // IMPORTANT: Replace this with your actual Google Apps Script Web App URL.
     // See the README.md for instructions on how to set this up.
-    const spreadsheetEndpoint = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbwc9FkU34nK0HT0LHEKUO9qnYtzzxzSz72E1fKWk5i2xGjUxEK26560pH_ugT2iZgAy/exec';
 
     // The data payload for the spreadsheet. We'll send the form data directly.
     const payload = formData;
