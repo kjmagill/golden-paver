@@ -16,7 +16,7 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
-- [Form Submission & SMS Notifications](#form-submission--sms-notifications)
+- [Form Submission & Spreadsheet Integration](#form-submission--spreadsheet-integration)
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Author](#author)
@@ -32,7 +32,7 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 - **Interactive Before & After Sliders:** A powerful visual tool to demonstrate the quality and impact of the restoration services.
 - **Dynamic Components:** Built with React for a modular, maintainable, and interactive user interface.
 - **Accessible UI:** Designed with accessibility in mind, incorporating ARIA roles, semantic HTML, and keyboard navigation support.
-- **Secure Lead Capture Form:** An integrated contact form that securely submits data to a backend endpoint for processing, complete with client-side validation and clear user feedback.
+- **Lead Capture to Spreadsheet:** The contact form securely submits data to a Google Sheet via a serverless Google Apps Script, complete with client-side validation and clear user feedback.
 - **Modern & Professional Aesthetics:** Custom-themed with Tailwind CSS to match the company's brand identity.
 
 ## Technologies Used
@@ -41,29 +41,98 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 - **[TypeScript](https://www.typescriptlang.org/):** A typed superset of JavaScript that compiles to plain JavaScript.
 - **[Tailwind CSS](https://tailwindcss.com/):** A utility-first CSS framework for rapid UI development.
 
-## Form Submission & SMS Notifications
+## Form Submission & Spreadsheet Integration
 
-To ensure security and reliability, the contact form does not send SMS messages directly from the user's browser. Instead, it is configured to send the form data to a backend API endpoint.
+The contact form is configured to send submission data directly to a Google Sheet, providing a free and simple backend for lead management. This is achieved using a **Google Apps Script** deployed as a web app.
 
-### Current Implementation
+Follow these steps to set it up:
 
-- The form makes a `POST` request to `/api/send-sms` with the user's information.
-- Robust error handling and user feedback (submitting, success, error states) are implemented on the frontend.
+### Step 1: Create Your Google Sheet
 
-### Completing the SMS Integration (For Developers)
+1.  Go to [sheets.google.com](https://sheets.google.com) and create a new, blank spreadsheet.
+2.  Give it a name, for example, "Website Leads".
+3.  The script will automatically create a sheet named "Submissions" and add the necessary headers, so you can leave the sheet empty.
 
-To make the SMS notifications fully functional, a backend endpoint must be created to handle the incoming `POST` request. Here is the required workflow:
+### Step 2: Create the Google Apps Script
 
-1.  **Create a Server-Side Endpoint:** Set up a backend route or a serverless function that listens for `POST` requests at `/api/send-sms`. This can be done using technologies like Node.js with Express, or serverless platforms like Vercel or Netlify Functions.
+1.  In your new spreadsheet, go to `Extensions` > `Apps Script`.
+2.  A new script editor will open. Delete any boilerplate code in the `Code.gs` file.
+3.  Copy and paste the entire script below into the editor.
 
-2.  **Choose an SMS Provider:** Sign up for an SMS gateway service like [Twilio](https://www.twilio.com/) or [Vonage](https://www.vonage.com/communications-apis/sms/).
+```javascript
+// The name of the sheet in your Google Sheet file where data will be saved.
+var SHEET_NAME = "Submissions"; 
 
-3.  **Implement the Logic:** In your backend function:
-    a. Receive the JSON payload from the form submission.
-    b. Securely use your SMS provider's API key (stored as an environment variable, **never** in the frontend code).
-    c. Format the form data into a structured message.
-    d. Use the provider's SDK or API to send the formatted message to the desired phone numbers (`609-408-5000` & `609-780-0536`).
-    e. Return a success (e.g., `200 OK`) or error (e.g., `500 Internal Server Error`) response to the frontend.
+/**
+ * Handles HTTP POST requests to the web app.
+ * This function is the entry point for our form submission.
+ */
+function doPost(e) {
+  try {
+    var doc = SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = doc.getSheetByName(SHEET_NAME);
+
+    // If the sheet doesn't exist, create it with headers.
+    if (!sheet) {
+      sheet = doc.insertSheet(SHEET_NAME);
+      var headers = ["Timestamp", "Name", "Address", "Phone", "Service", "Message"];
+      sheet.appendRow(headers);
+    }
+
+    // Parse the JSON data sent from the form.
+    var data = JSON.parse(e.postData.contents);
+    
+    // Create an array for the new row, ensuring the order matches the headers.
+    var newRow = [
+      new Date(),
+      data.name || "",
+      data.address || "",
+      data.phone || "",
+      data.service || "",
+      data.message || ""
+    ];
+
+    // Append the new row to the sheet.
+    sheet.appendRow(newRow);
+
+    // Return a success response. This is crucial for the frontend to know the submission worked.
+    // The `ContentService` is used to create a proper JSON response and handle CORS.
+    return ContentService
+      .createTextOutput(JSON.stringify({ "status": "success", "message": "Data received" }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    // If an error occurs, log it and return an error response.
+    Logger.log(error.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({ "status": "error", "message": error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+```
+
+4.  Save the script project (click the floppy disk icon). Give it a name like "Contact Form Handler".
+
+### Step 3: Deploy the Script
+
+1.  At the top right of the script editor, click the **Deploy** button, then select **New deployment**.
+2.  Click the gear icon next to "Select type" and choose **Web app**.
+3.  Fill in the deployment settings:
+    -   **Description:** "Contact form handler for Golden Paver Restorations website."
+    -   **Execute as:** `Me`
+    -   **Who has access:** `Anyone` (This is important! It makes the endpoint public so the website can send data to it.)
+4.  Click **Deploy**.
+5.  Google will ask you to authorize the script's permissions. Click **Authorize access**, choose your Google account, and approve the permissions.
+6.  After authorizing, a "Deployment successfully updated" window will appear. **Copy the Web app URL**. It will look like `https://script.google.com/macros/s/xxxxxxxxxxx/exec`.
+
+### Step 4: Update the Frontend Code
+
+1.  Open the `components/Contact.tsx` file in this project.
+2.  Find the line with the `spreadsheetEndpoint` constant.
+3.  Replace the placeholder URL (`https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec`) with the URL you just copied from your deployment.
+4.  Save the file.
+
+Your form is now live! Any new submissions will automatically appear as new rows in your Google Sheet.
 
 ## Getting Started
 

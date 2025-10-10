@@ -55,25 +55,18 @@ const Contact: React.FC = () => {
     setStatus('submitting');
     setErrors({});
 
-    // The backend endpoint that will receive the form data and send the SMS.
-    const endpoint = '/api/send-sms';
+    // IMPORTANT: Replace this with your actual Google Apps Script Web App URL.
+    // See the README.md for instructions on how to set this up.
+    const spreadsheetEndpoint = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
 
-    // The data payload that will be sent to the backend.
-    const payload = {
-      ...formData,
-      // The backend will send the SMS to these recipients.
-      recipients: ['609-408-5000', '609-780-0536'],
-    };
+    // The data payload for the spreadsheet. We'll send the form data directly.
+    const payload = formData;
 
     try {
-      // In a real application, this fetch request sends the data to your server.
-      // The server would then use a service like Twilio to send the SMS.
-      // We will simulate this call for now as we don't have a live backend.
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulating network delay
-
-      // To make this a real call, you would replace the simulation with:
-      /*
-      const response = await fetch(endpoint, {
+      // This fetch request sends the data to a Google Apps Script endpoint.
+      // The script is configured to accept JSON, add it to a Google Sheet,
+      // and handle CORS to return a proper success/error response.
+      const response = await fetch(spreadsheetEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,9 +77,15 @@ const Contact: React.FC = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      */
+      
+      const result = await response.json();
 
-      console.log('Form Submitted:', payload);
+      if (result.status !== 'success') {
+        // If the script returns an error status, we'll handle it.
+        throw new Error(result.message || 'An error occurred on the server.');
+      }
+
+      console.log('Form Submitted to Spreadsheet:', payload);
       setStatus('success');
       // Reset the form fields after successful submission.
       setFormData({ name: '', address: '', phone: '', service: '', message: '' });
