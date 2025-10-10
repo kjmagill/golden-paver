@@ -82,6 +82,16 @@ function doPost(e) {
     // Parse the JSON data sent from the form.
     var data = JSON.parse(e.postData.contents);
     
+    // --- HONEYPOT SPAM CHECK ---
+    // If the hidden 'hp' field is filled out, it's likely a bot.
+    // Silently exit and return a success message to trick the bot,
+    // without writing any data to the spreadsheet.
+    if (data.hp && data.hp !== "") {
+      return ContentService
+        .createTextOutput(JSON.stringify({ "status": "success", "message": "Submission received" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     // Create an array for the new row, ensuring the order matches the headers.
     var newRow = [
       new Date(),

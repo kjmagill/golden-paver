@@ -8,8 +8,9 @@ interface FormData {
     name: string;
     address: string;
     phone: string;
-    service: string; // New field for service type
+    service: string;
     message: string;
+    hp: string; // Honeypot field for spam prevention
 }
 
 const serviceOptions = [
@@ -20,7 +21,7 @@ const serviceOptions = [
 ];
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({ name: '', address: '', phone: '', service: '', message: '' });
+  const [formData, setFormData] = useState<FormData>({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
   // `status` tracks the current state of the form, used to show different UI elements (form, loading, success/error message).
   const [status, setStatus] = useState<FormStatus>('idle');
   // `errors` holds validation error messages for each field.
@@ -88,7 +89,7 @@ const Contact: React.FC = () => {
       console.log('Form Submitted to Spreadsheet:', payload);
       setStatus('success');
       // Reset the form fields after successful submission.
-      setFormData({ name: '', address: '', phone: '', service: '', message: '' });
+      setFormData({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
 
     } catch (error) {
       console.error('Submission failed:', error);
@@ -198,6 +199,12 @@ const Contact: React.FC = () => {
                   <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={5} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}></textarea>
                   {errors.message && <p id="message-error" className="text-red-500 text-xs mt-1">{errors.message}</p>}
                 </div>
+
+                {/* Honeypot Field for Spam Protection */}
+                <div style={{ position: 'absolute', left: '-5000px' }} aria-hidden="true">
+                    <input type="text" name="hp" value={formData.hp} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                </div>
+
                 <div className="text-center">
                   <button 
                     type="submit" 
