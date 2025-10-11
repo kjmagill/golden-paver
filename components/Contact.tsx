@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
     setErrors({});
 
     // IMPORTANT: This is your live Google Apps Script Web App URL.
-    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbwNgQP6D6a-ujTWYJ-S1S5khQS0MnmOkeFASL5aMVNsxQarPuGzwy9ChsuJew_b4ZAu/exec';
+    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbxpxP6e6cnjRtXDVVGEOXh8mZH8qLBJJDeoBfTsXmzAKeTagzSMaYGv3Ul1RTqX-z-s/exec';
 
     // The data payload for the spreadsheet. We exclude the honeypot field.
     const { hp, ...payload } = formData;

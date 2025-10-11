@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
 
         {/* Brand & Tagline */}
         <a href="index.html" className="inline-flex items-center justify-center gap-2 sm:gap-3 mb-4 text-brand-gold-light hover:text-brand-gold transition-colors">
-          <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
+          <Logo className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10" />
           <span className="font-brand font-bold text-lg sm:text-xl tracking-wider uppercase">
             Golden Paver<span className="hidden sm:inline"> Restorations</span>
           </span>
