@@ -72,32 +72,40 @@ const Contact: React.FC = () => {
 
     const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbxpxP6e6cnjRtXDVVGEOXh8mZH8qLBJJDeoBfTsXmzAKeTagzSMaYGv3Ul1RTqX-z-s/exec';
 
+    // Exclude the honeypot field from the final payload.
     const { hp, ...payload } = formData;
     
-    const scriptFormData = new FormData();
-    Object.keys(payload).forEach(key => {
-        scriptFormData.append(key, payload[key as keyof typeof payload]);
-    });
-
     try {
-      // FIX: Use `mode: 'no-cors'` to prevent CORS errors when posting to Google Apps Script.
-      // The browser will make the request but won't allow the script to access the response.
-      // This is a standard workaround for this specific use case.
-      await fetch(spreadsheetEndpoint, {
+      const response = await fetch(spreadsheetEndpoint, {
         method: 'POST',
-        mode: 'no-cors',
-        body: scriptFormData,
+        headers: {
+          // Use 'text/plain' to send a JSON string without triggering a CORS preflight request.
+          // This aligns with the Google Apps Script which expects to parse a JSON string.
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(payload),
       });
 
-      // In 'no-cors' mode, we can't check the response status. We assume success
-      // if the fetch call doesn't throw a network error.
-      console.log('Form Submitted to Spreadsheet (no-cors mode):', payload);
-      setStatus('success');
-      setFormData({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
-
+      if (response.ok) {
+        const result = await response.json();
+        if (result.status === 'success') {
+          console.log('Form submitted successfully:', payload);
+          setStatus('success');
+          // Reset form fields on successful submission.
+          setFormData({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
+        } else {
+          // Handle cases where the script returns an error status.
+          console.error('Submission failed on the server:', result.message);
+          setStatus('error');
+        }
+      } else {
+        // Handle HTTP errors (e.g., 404, 500).
+        console.error('Submission failed with HTTP error:', response.statusText);
+        setStatus('error');
+      }
     } catch (error) {
-      // This will now only catch network-level errors (e.g., user is offline).
-      console.error('Submission failed with a network error:', error);
+      // Catch network errors or issues with parsing the response.
+      console.error('An error occurred during submission:', error);
       setStatus('error');
     }
   };
