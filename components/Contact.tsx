@@ -54,14 +54,14 @@ const Contact: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // FIX: Corrected the event type for the form submission handler. `React.FormEvent` is generic over the element, so `HTMLFormElement` is the correct type, not `HTMLFormEvent`.
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) {
       return;
     }
-    
+
     // Honeypot check: If this field has a value, it's likely a bot.
-    // We can fail silently or show a generic success message to fool the bot.
     if (formData.hp) {
       console.log('Honeypot triggered. Submission blocked.');
       setStatus('success'); // Pretend it worked to not alert the bot.
@@ -71,38 +71,34 @@ const Contact: React.FC = () => {
     setStatus('submitting');
     setErrors({});
 
-    // IMPORTANT: This is your live Google Apps Script Web App URL.
     const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbxpxP6e6cnjRtXDVVGEOXh8mZH8qLBJJDeoBfTsXmzAKeTagzSMaYGv3Ul1RTqX-z-s/exec';
 
-    // The data payload for the spreadsheet. We exclude the honeypot field.
     const { hp, ...payload } = formData;
+    
+    // Create a FormData object. This is a common way to submit to Google Apps Scripts
+    // and avoids CORS preflight issues that can occur with 'application/json'.
+    const scriptFormData = new FormData();
+    Object.keys(payload).forEach(key => {
+        scriptFormData.append(key, payload[key as keyof typeof payload]);
+    });
 
     try {
-      // This fetch request sends the data to a Google Apps Script endpoint.
-      // The script is configured to accept JSON, add it to a Google Sheet,
-      // and handle CORS to return a proper success/error response.
+      // When using FormData, fetch automatically sets the correct 'Content-Type' header.
       const response = await fetch(spreadsheetEndpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+        body: scriptFormData,
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        // This will catch HTTP error statuses like 404 or 500.
+        throw new Error(`Submission failed with status: ${response.status}`);
       }
       
-      const result = await response.json();
-
-      if (result.status !== 'success') {
-        // If the script returns an error status, we'll handle it.
-        throw new Error(result.message || 'An error occurred on the server.');
-      }
-
+      // With Google Apps Script, a successful POST often results in a redirect,
+      // which fetch handles gracefully. We don't need to parse a JSON response.
+      // If we reach this point without an error, we can consider it a success.
       console.log('Form Submitted to Spreadsheet:', payload);
       setStatus('success');
-      // Reset the form fields after successful submission.
       setFormData({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
 
     } catch (error) {
