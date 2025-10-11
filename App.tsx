@@ -6,6 +6,7 @@ import Gallery from './components/Gallery';
 import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 /**
  * The main application component.
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTopButton />
     </div>
   );
 };

@@ -29,7 +29,7 @@ const Testimonials: React.FC = () => {
             <div className="container mx-auto px-6">
                 <FadeIn>
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">What Our Clients Say</h2>
+                        <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">Trusted by Your Neighbors</h2>
                         <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
                             We take pride in our work, and our clients' satisfaction is our greatest reward.
                         </p>

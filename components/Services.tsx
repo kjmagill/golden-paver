@@ -60,7 +60,7 @@ const Services: React.FC = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">Our Services</h2>
             <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
-              We offer a comprehensive suite of services to make your hardscapes look brand new.
+              We offer a comprehensive suite of services in Cape May County to make your hardscapes look brand new.
             </p>
           </div>
         </FadeIn>

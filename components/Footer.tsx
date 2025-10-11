@@ -1,4 +1,5 @@
 import React from 'react';
+import Logo from './Logo';
 
 // This object generates the full URLs for social media sharing.
 // `encodeURIComponent` is used to ensure that the URLs, text, and descriptions are correctly formatted
@@ -11,16 +12,56 @@ const socialLinks = {
   email: `mailto:?subject=${encodeURIComponent('Check Out Golden Paver Restorations')}&body=${encodeURIComponent('I found this great paver restoration company, check out their work: https://www.goldenpaverrestorations.com/')}`
 };
 
+const serviceAreas = [
+    'Avalon', 'Stone Harbor', 'Cape May',
+    'The Wildwoods', 'Sea Isle City', 'Ocean City',
+    'Cape May CH', 'Erma'
+];
+
 /**
  * The Footer component contains contact information, social sharing links,
- * and copyright/credit details for the website.
+ * and copyright/credit details for the website in a new, visually balanced
+ * centered layout.
  */
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-oxford-blue border-t border-brand-slate-gray/30">
-      <div className="container mx-auto px-6 py-8 text-center text-brand-powder-blue">
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold text-white mb-3">Spread The Word</h3>
+    <footer className="bg-brand-oxford-blue text-brand-powder-blue border-t border-brand-slate-gray/30">
+      <div className="container mx-auto px-6 py-12 text-center">
+
+        {/* Brand & Tagline */}
+        <a href="index.html" className="inline-flex items-center justify-center gap-2 sm:gap-3 mb-4 text-brand-gold-light hover:text-brand-gold transition-colors">
+          <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
+          <span className="font-brand font-bold text-lg sm:text-xl tracking-wider uppercase">
+            Golden Paver<span className="hidden sm:inline"> Restorations</span>
+          </span>
+        </a>
+        <p className="text-brand-slate-gray max-w-md mx-auto">
+          The golden standard in paver cleaning, sealing, and restoration for South Jersey.
+        </p>
+
+        {/* Contact Info */}
+        <div className="my-8">
+           <a href="tel:609-849-8869" className="inline-flex items-center gap-2 font-semibold hover:text-brand-gold-light transition-colors text-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>609-849-8869</span>
+            </a>
+        </div>
+
+        {/* Service Area */}
+        <div className="my-8">
+          <h3 className="text-lg font-bold text-white mb-4">Proudly Serving Cape May County</h3>
+          <ul className="grid grid-cols-2 sm:grid-cols-4 gap-x-2 sm:gap-x-4 gap-y-2 max-w-lg mx-auto text-brand-slate-gray">
+            {serviceAreas.map(area => (
+              <li key={area}>{area}</li>
+            ))}
+          </ul>
+        </div>
+        
+        {/* Social Sharing */}
+        <div className="my-8">
+          <h3 className="text-lg font-bold text-white mb-4">Spread the Word</h3>
           <div className="flex justify-center items-center space-x-5">
             <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" className="text-brand-powder-blue hover:text-brand-gold-light transition-all duration-300 transform hover:-translate-y-1">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -28,7 +69,7 @@ const Footer: React.FC = () => {
               </svg>
             </a>
             <a href={socialLinks.x} target="_blank" rel="noopener noreferrer" aria-label="Share on X" className="text-brand-powder-blue hover:text-brand-gold-light transition-all duration-300 transform hover:-translate-y-1">
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.931L18.901 1.153ZM17.61 20.644h2.039L6.486 3.24H4.298l13.312 17.404Z"/>
               </svg>
             </a>
@@ -39,27 +80,24 @@ const Footer: React.FC = () => {
             </a>
             <a href={socialLinks.pinterest} target="_blank" rel="noopener noreferrer" aria-label="Share on Pinterest" className="text-brand-powder-blue hover:text-brand-gold-light transition-all duration-300 transform hover:-translate-y-1">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M12 2C6.48 2 2 6.48 2 12c0 4.25 2.66 7.89 6.35 9.32.09-.38.16-.92.16-1.28 0-.42-.06-1.32-.3-2.23-.23-.84-.54-1.81-.54-1.81s-.28-.56-.28-1.37c0-1.28.78-2.23 1.65-2.23.78 0 1.15.59 1.15 1.3 0 .78-.5 1.95-.76 3.04-.21.91.45 1.65 1.36 1.65 1.63 0 2.89-1.73 2.89-4.19 0-2.18-1.55-3.74-3.83-3.74-2.59 0-4.18 1.93-4.18 3.99 0 .78.3.1.65 2.08.07.1.09.18.06.29-.03.1-.17.66-.2.81-.04.18-.15.22-.33.13-1.25-.58-2.03-2.4-2.03-3.88 0-3.15 2.29-5.75 6.34-5.75 3.34 0 5.63 2.4 5.63 5.26 0 3.34-2.1 5.93-5.02 5.93-.98 0-1.91-.5-2.22-1l-.48 1.92c-.22.86-.84 1.95-1.24 2.62C9.27 21.8 10.6 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/>
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-.979 0-1.916-.523-2.228-1.148l-.622 2.353c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.96.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/>
               </svg>
             </a>
             <a href={socialLinks.email} aria-label="Share via Email" className="text-brand-powder-blue hover:text-brand-gold-light transition-all duration-300 transform hover:-translate-y-1">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M3 4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4zm17 1.25-7.34 5.39a1.002 1.002 0 0 1-1.32 0L4 5.25V19h16V5.25zM4.52 4l7.48 5.5 7.48-5.5H4.52z" />
+                <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z" />
+                <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
               </svg>
             </a>
           </div>
         </div>
+        
+        {/* Bottom Bar: Copyright and Credits */}
         <div className="border-t border-brand-slate-gray/30 pt-6 mt-6">
-          <div className="mb-4">
-            <a href="tel:609-849-8869" className="inline-flex items-center gap-2 text-lg font-semibold hover:text-brand-gold-light transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              <span>609-849-8869</span>
-            </a>
-          </div>
-          <p>&copy; {new Date().getFullYear()} Golden Paver Restorations, LLC. All Rights Reserved.</p>
-          <p className="text-sm text-brand-slate-gray mt-1 flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1">
+            <p className="text-sm text-brand-slate-gray mb-2">
+                &copy; {new Date().getFullYear()} Golden Paver Restorations, LLC. All Rights Reserved.
+            </p>
+            <p className="text-sm text-brand-slate-gray flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1">
               <span>Designed by</span>
               <a href="https://kjmagill.com" className="hover:text-brand-gold-light transition-colors">
                 KJ Magill
