@@ -20,6 +20,12 @@ const serviceOptions = [
   'Other / Not Sure'
 ];
 
+/**
+ * The Contact component provides a form for users to request a free estimate.
+ * It includes client-side validation, handles form submission to a serverless backend
+ * (Google Apps Script), and displays status messages (loading, success, error) to the user.
+ * A honeypot field is included for basic spam prevention.
+ */
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
   // `status` tracks the current state of the form, used to show different UI elements (form, loading, success/error message).
@@ -139,7 +145,7 @@ const Contact: React.FC = () => {
               </p>
               <p className="text-lg text-brand-powder-blue mt-2">
                 Prefer to talk? Call us for an even faster response: 
-                <a href="tel:609-408-5000" className="font-bold text-white hover:text-brand-gold-light transition-colors whitespace-nowrap"> 609-408-5000</a>
+                <a href="tel:609-849-8869" className="font-bold text-white hover:text-brand-gold-light transition-colors whitespace-nowrap"> 609-849-8869</a>
               </p>
             </div>
           </div>

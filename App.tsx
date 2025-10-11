@@ -7,6 +7,11 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+/**
+ * The main application component.
+ * It serves as the root of the component tree, assembling the page layout
+ * by composing all the major sections: Header, Hero, Services, etc.
+ */
 const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col">

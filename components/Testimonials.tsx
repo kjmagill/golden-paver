@@ -19,6 +19,10 @@ const testimonials = [
     }
 ];
 
+/**
+ * The Testimonials component displays quotes from satisfied clients to build trust and social proof.
+ * Each testimonial is presented in a card, creating a clean and readable layout.
+ */
 const Testimonials: React.FC = () => {
     return (
         <section id="testimonials" className="py-16 sm:py-20 bg-white">

@@ -47,6 +47,11 @@ const services = [
   },
 ];
 
+/**
+ * The Services component displays the main offerings of the business.
+ * It uses a grid layout to present each service in a clear and visually appealing card format,
+ * with custom icons to represent each category.
+ */
 const Services: React.FC = () => {
   return (
     <section id="services" className="py-16 sm:py-20 bg-brand-bg">

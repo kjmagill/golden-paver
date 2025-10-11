@@ -26,6 +26,11 @@ const galleryItems = [
   },
 ];
 
+/**
+ * The Gallery component showcases the company's work using a series of
+ * interactive BeforeAfterSlider components. It provides visual proof of the
+ * quality and impact of their services.
+ */
 const Gallery: React.FC = () => {
   return (
     <section id="gallery" className="py-16 sm:py-20 bg-brand-bg">

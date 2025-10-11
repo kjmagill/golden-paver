@@ -4,8 +4,12 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#111F3A" />
+    <meta name="msapplication-TileColor" content="#111F3A">
+    <meta name="msapplication-TileImage" content="/ms-tile-icon-144x144.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.goldenpaverrestorations.com/" />
@@ -48,7 +52,8 @@
               'brand-gold-light': '#D5AD36',
               'brand-oxford-blue': '#111F3A',
               'brand-powder-blue': '#9CB2C6',
-              'brand-slate-gray': '#7389A1',
+              // ACCESSIBILITY FIX: Darkened slate gray to meet WCAG AA contrast ratio of 4.5:1 for body text.
+              'brand-slate-gray': '#54667a',
               'brand-bg': '#F9FAFB',
             },
             fontFamily: {
@@ -81,7 +86,7 @@
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   "name": "Golden Paver Restorations",
-  "telephone": "+1-609-408-5000",
+  "telephone": "+1-609-849-8869",
   "url": "https://www.goldenpaverrestorations.com/",
   "description": "Expert paver sealing, cleaning, and restoration services in South Jersey. We specialize in bringing driveways, patios, and walkways back to life.",
   "image": "https://i.postimg.cc/3RxRYdp2/j2.jpg",
@@ -141,6 +146,24 @@
   ]
 }
 </script>
+<!-- Accessibility Enhancement: Respects user preference for reduced motion -->
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    /* Disables smooth scrolling if the user has requested reduced motion */
+    html {
+      scroll-behavior: auto;
+    }
+    .scroll-smooth {
+      scroll-behavior: auto !important;
+    }
+    /* Disables all transition and transform effects on fade-in elements */
+    .fade-in-element {
+      transition-property: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>
 </head>
   <body class="bg-brand-bg text-brand-slate-gray">
     <div id="root"></div>

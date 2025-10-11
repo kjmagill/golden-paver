@@ -72,7 +72,8 @@ const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, direction = 'up', 
   const finalClasses = 'opacity-100 translate-y-0 translate-x-0';
   
   // Conditionally apply classes based on whether the component is in view.
-  const combinedClasses = `${baseClasses} ${isInView ? finalClasses : initialClasses} ${className}`;
+  // The 'fade-in-element' class is added to allow targeting via CSS for accessibility overrides (e.g., prefers-reduced-motion).
+  const combinedClasses = `fade-in-element ${baseClasses} ${isInView ? finalClasses : initialClasses} ${className}`;
 
   return (
     <div ref={ref} className={combinedClasses} style={{ transitionDelay: `${delay}ms` }}>

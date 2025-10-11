@@ -58,6 +58,8 @@ const Header: React.FC = () => {
   );
 
   return (
+    // The header is 'sticky' and positioned at 'top-0' to keep it fixed at the top of the viewport during scroll.
+    // 'z-50' ensures it appears above other page content.
     <header className="bg-brand-oxford-blue sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
         <a href="index.html" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light hover:text-brand-gold transition-colors">
@@ -72,9 +74,9 @@ const Header: React.FC = () => {
               {link.label}
             </a>
           ))}
-          <a href="tel:609-408-5000" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
+          <a href="tel:609-849-8869" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
             <PhoneIcon className="w-4 h-4" />
-            <span>609-408-5000</span>
+            <span>609-849-8869</span>
           </a>
           <QuoteButton />
         </nav>
@@ -105,9 +107,9 @@ const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
-             <a href="tel:609-408-5000" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold py-2">
+             <a href="tel:609-849-8869" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold py-2">
               <PhoneIcon className="w-4 h-4" />
-              <span>609-408-5000</span>
+              <span>609-849-8869</span>
             </a>
             <QuoteButton isMobile={true} />
           </nav>

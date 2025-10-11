@@ -2,6 +2,11 @@ import React from 'react';
 import BeforeAfterSlider from './BeforeAfterSlider';
 import FadeIn from './FadeIn';
 
+/**
+ * The Hero component serves as the main "above-the-fold" content.
+ * It features a compelling headline, a call-to-action, and an interactive
+ * before-and-after image slider to immediately engage visitors.
+ */
 const Hero: React.FC = () => {
   return (
     <section id="home" className="bg-brand-oxford-blue text-white py-16 sm:py-20 md:py-28 overflow-x-hidden">

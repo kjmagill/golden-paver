@@ -16,9 +16,12 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
-- [Form Submission & Spreadsheet Integration](#form-submission--spreadsheet-integration)
+- [Automated Lead Management](#automated-lead-management)
 - [Getting Started](#getting-started)
+- [Configuration](#configuration)
 - [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
 - [Author](#author)
 
 ## Key Features
@@ -32,7 +35,7 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 - **Interactive Before & After Sliders:** A powerful visual tool to demonstrate the quality and impact of the restoration services.
 - **Dynamic Components:** Built with React for a modular, maintainable, and interactive user interface.
 - **Accessible UI:** Designed with accessibility in mind, incorporating ARIA roles, semantic HTML, and keyboard navigation support.
-- **Lead Capture to Spreadsheet:** The contact form securely submits data to a Google Sheet via a serverless Google Apps Script, complete with client-side validation and clear user feedback.
+- **Automated Lead Management:** The contact form uses a serverless Google Apps Script to save submissions to a private Google Sheet and send an instant SMS notification to the business owners via Twilio.
 - **Modern & Professional Aesthetics:** Custom-themed with Tailwind CSS to match the company's brand identity.
 
 ## Technologies Used
@@ -41,108 +44,17 @@ A modern, responsive marketing website for Golden Paver Restorations, a premier 
 - **[TypeScript](https://www.typescriptlang.org/):** A typed superset of JavaScript that compiles to plain JavaScript.
 - **[Tailwind CSS](https://tailwindcss.com/):** A utility-first CSS framework for rapid UI development.
 
-## Form Submission & Spreadsheet Integration
+## Automated Lead Management
 
-The contact form is configured to send submission data directly to a Google Sheet, providing a free and simple backend for lead management. This is achieved using a **Google Apps Script** deployed as a web app.
+This project features a robust, serverless backend for handling contact form submissions, ensuring that new leads are captured and acted upon immediately. The system is built using Google Apps Script, providing a cost-effective and maintenance-free solution.
 
-Follow these steps to set it up:
+When a potential customer submits the "Request Your Free Estimate" form:
 
-### Step 1: Create Your Google Sheet
+1.  **Data is Sent to a Private Google Sheet:** The submission data—including name, address, and project details—is securely transmitted to a private Google Sheet. This sheet acts as a simple and effective Customer Relationship Management (CRM) system, allowing the business owners to track and manage all incoming leads in one organized place.
 
-1.  Go to [sheets.google.com](https://sheets.google.com) and create a new, blank spreadsheet.
-2.  Give it a name, for example, "Website Leads".
-3.  The script will automatically create a sheet named "Submissions" and add the necessary headers, so you can leave the sheet empty.
+2.  **Instant SMS Notifications via Twilio:** Simultaneously, the script triggers an API call to Twilio, sending an instant SMS notification to the business owners' phone line. This alert contains the new lead's essential information, enabling a rapid response and improving the chances of converting the inquiry into a customer.
 
-### Step 2: Create the Google Apps Script
-
-1.  In your new spreadsheet, go to `Extensions` > `Apps Script`.
-2.  A new script editor will open. Delete any boilerplate code in the `Code.gs` file.
-3.  Copy and paste the entire script below into the editor.
-
-```javascript
-// The name of the sheet in your Google Sheet file where data will be saved.
-var SHEET_NAME = "Submissions"; 
-
-/**
- * Handles HTTP POST requests to the web app.
- * This function is the entry point for our form submission.
- */
-function doPost(e) {
-  try {
-    var doc = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = doc.getSheetByName(SHEET_NAME);
-
-    // If the sheet doesn't exist, create it with headers.
-    if (!sheet) {
-      sheet = doc.insertSheet(SHEET_NAME);
-      var headers = ["Timestamp", "Name", "Address", "Phone", "Service", "Message"];
-      sheet.appendRow(headers);
-    }
-
-    // Parse the JSON data sent from the form.
-    var data = JSON.parse(e.postData.contents);
-    
-    // --- HONEYPOT SPAM CHECK ---
-    // If the hidden 'hp' field is filled out, it's likely a bot.
-    // Silently exit and return a success message to trick the bot,
-    // without writing any data to the spreadsheet.
-    if (data.hp && data.hp !== "") {
-      return ContentService
-        .createTextOutput(JSON.stringify({ "status": "success", "message": "Submission received" }))
-        .setMimeType(ContentService.MimeType.JSON);
-    }
-
-    // Create an array for the new row, ensuring the order matches the headers.
-    var newRow = [
-      new Date(),
-      data.name || "",
-      data.address || "",
-      data.phone || "",
-      data.service || "",
-      data.message || ""
-    ];
-
-    // Append the new row to the sheet.
-    sheet.appendRow(newRow);
-
-    // Return a success response. This is crucial for the frontend to know the submission worked.
-    // The `ContentService` is used to create a proper JSON response and handle CORS.
-    return ContentService
-      .createTextOutput(JSON.stringify({ "status": "success", "message": "Data received" }))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch (error) {
-    // If an error occurs, log it and return an error response.
-    Logger.log(error.toString());
-    return ContentService
-      .createTextOutput(JSON.stringify({ "status": "error", "message": error.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
-```
-
-4.  Save the script project (click the floppy disk icon). Give it a name like "Contact Form Handler".
-
-### Step 3: Deploy the Script
-
-1.  At the top right of the script editor, click the **Deploy** button, then select **New deployment**.
-2.  Click the gear icon next to "Select type" and choose **Web app**.
-3.  Fill in the deployment settings:
-    -   **Description:** "Contact form handler for Golden Paver Restorations website."
-    -   **Execute as:** `Me`
-    -   **Who has access:** `Anyone` (This is important! It makes the endpoint public so the website can send data to it.)
-4.  Click **Deploy**.
-5.  Google will ask you to authorize the script's permissions. Click **Authorize access**, choose your Google account, and approve the permissions.
-6.  After authorizing, a "Deployment successfully updated" window will appear. **Copy the Web app URL**. It will look like `https://script.google.com/macros/s/xxxxxxxxxxx/exec`.
-
-### Step 4: Update the Frontend Code
-
-1.  Open the `components/Contact.tsx` file in this project.
-2.  Find the line with the `spreadsheetEndpoint` constant.
-3.  Replace the placeholder URL (`https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec`) with the URL you just copied from your deployment.
-4.  Save the file.
-
-Your form is now live! Any new submissions will automatically appear as new rows in your Google Sheet.
+This two-pronged approach ensures that no lead is missed and that follow-up is both timely and efficient. The form also includes a "honeypot" field for basic spam prevention.
 
 ## Getting Started
 
@@ -174,6 +86,19 @@ You need a modern web browser and a simple local server to handle module imports
     ```
 4.  **Open your browser** and navigate to `http://localhost:8000` (or the port specified by your server).
 
+## Configuration
+
+To use the automated lead management feature with your own Google Sheet and Twilio account, you will need to configure the contact form endpoint.
+
+1.  **Set up Google Apps Script:** Create a web app using Google Apps Script that saves form data to a Google Sheet and optionally triggers a Twilio SMS.
+2.  **Deploy the Script:** Deploy your script as a web app and copy its unique URL.
+3.  **Update the Endpoint:** Open the `components/Contact.tsx` file and replace the placeholder URL in the `spreadsheetEndpoint` constant with your own Google Apps Script URL:
+
+    ```javascript
+    // In components/Contact.tsx
+    const spreadsheetEndpoint = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+    ```
+
 ## Project Structure
 
 The project is organized into modular components for easy maintenance and scalability.
@@ -196,6 +121,20 @@ The project is organized into modular components for easy maintenance and scalab
 ├── index.tsx
 └── README.md
 ```
+
+## Contributing
+
+Contributions are welcome! If you have suggestions for improving the project, please feel free to open an issue or submit a pull request.
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License. See the [MIT License](https://opensource.org/licenses/MIT) for details.
 
 ## Author
 
