@@ -59,15 +59,23 @@ const Contact: React.FC = () => {
     if (!validate()) {
       return;
     }
+    
+    // Honeypot check: If this field has a value, it's likely a bot.
+    // We can fail silently or show a generic success message to fool the bot.
+    if (formData.hp) {
+      console.log('Honeypot triggered. Submission blocked.');
+      setStatus('success'); // Pretend it worked to not alert the bot.
+      return;
+    }
+
     setStatus('submitting');
     setErrors({});
 
-    // IMPORTANT: Replace this with your actual Google Apps Script Web App URL.
-    // See the README.md for instructions on how to set this up.
-    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbwc9FkU34nK0HT0LHEKUO9qnYtzzxzSz72E1fKWk5i2xGjUxEK26560pH_ugT2iZgAy/exec';
+    // IMPORTANT: This is your live Google Apps Script Web App URL.
+    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbwNgQP6D6a-ujTWYJ-S1S5khQS0MnmOkeFASL5aMVNsxQarPuGzwy9ChsuJew_b4ZAu/exec';
 
-    // The data payload for the spreadsheet. We'll send the form data directly.
-    const payload = formData;
+    // The data payload for the spreadsheet. We exclude the honeypot field.
+    const { hp, ...payload } = formData;
 
     try {
       // This fetch request sends the data to a Google Apps Script endpoint.
@@ -123,7 +131,7 @@ const Contact: React.FC = () => {
        return (
         <div className="text-center py-10" role="alert" aria-live="assertive">
           <h3 className="text-2xl font-bold mb-2 text-red-600">Submission Failed</h3>
-          <p className="mb-6">We're sorry, but something went wrong. Please try again later or give us a call.</p>
+          <p className="mb-6">We're sorry, but something went wrong. This can sometimes be caused by pop-up or ad blockers. Please try disabling them, refresh the page, and submit the form again. If the issue persists, please try again later or give us a call.</p>
            <button onClick={resetForm} className="bg-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:bg-brand-gold-light transition-colors">
             Try Again
           </button>
