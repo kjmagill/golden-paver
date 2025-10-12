@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FadeIn from './FadeIn';
 
-// Defines the possible states of the form submission process.
+// Defines the possible states of a form submission process.
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 interface FormData {
@@ -186,7 +186,7 @@ const Contact: React.FC = () => {
             <h2 className="text-3xl sm:text-4xl font-bold font-display text-white">Ready to Transform Your Space?</h2>
             <div className="max-w-3xl mx-auto">
               <p className="text-lg text-brand-powder-blue mt-4">
-                Fill out the form below for a free, no-obligation estimate. We proudly serve homeowners throughout Cape May County. One of our owners will get back to you within 24 hours.
+                Fill out the form below for a free, no-obligation estimate. One of our owners will get back to you within 24 hours.
               </p>
               <p className="text-lg text-brand-powder-blue mt-2">
                 Prefer to talk? Call us for an even faster response: 
