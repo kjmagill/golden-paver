@@ -33,10 +33,16 @@ const Contact: React.FC = () => {
   // `errors` holds validation error messages for each field.
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+  
+    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
 
   /**
    * Performs client-side validation on the form data.
@@ -72,40 +78,33 @@ const Contact: React.FC = () => {
 
     const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbxpxP6e6cnjRtXDVVGEOXh8mZH8qLBJJDeoBfTsXmzAKeTagzSMaYGv3Ul1RTqX-z-s/exec';
 
-    // Exclude the honeypot field from the final payload.
     const { hp, ...payload } = formData;
     
     try {
+      // WORKAROUND: Send the data as a JSON string but with a 'text/plain' Content-Type.
+      // This avoids a CORS preflight request while still sending data that the
+      // Google Apps Script can easily parse using JSON.parse().
       const response = await fetch(spreadsheetEndpoint, {
         method: 'POST',
         headers: {
-          // Use 'text/plain' to send a JSON string without triggering a CORS preflight request.
-          // This aligns with the Google Apps Script which expects to parse a JSON string.
           'Content-Type': 'text/plain;charset=utf-8',
         },
         body: JSON.stringify(payload),
       });
+      
+      const result = await response.json();
 
-      if (response.ok) {
-        const result = await response.json();
-        if (result.status === 'success') {
-          console.log('Form submitted successfully:', payload);
+      if (result.status === 'success') {
+          console.log('Form submission successful:', result.message);
           setStatus('success');
-          // Reset form fields on successful submission.
           setFormData({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
-        } else {
-          // Handle cases where the script returns an error status.
-          console.error('Submission failed on the server:', result.message);
-          setStatus('error');
-        }
       } else {
-        // Handle HTTP errors (e.g., 404, 500).
-        console.error('Submission failed with HTTP error:', response.statusText);
-        setStatus('error');
+          // Handle specific errors returned from the Apps Script
+          throw new Error(result.message || 'An unknown error occurred on the server.');
       }
+
     } catch (error) {
-      // Catch network errors or issues with parsing the response.
-      console.error('An error occurred during submission:', error);
+      console.error('Submission failed:', error);
       setStatus('error');
     }
   };
@@ -194,7 +193,7 @@ const Contact: React.FC = () => {
                               name="service"
                               value={option}
                               checked={formData.service === option}
-                              onChange={handleChange}
+                              onChange={handleRadioChange}
                               className="h-4 w-4 text-brand-gold focus:ring-brand-powder-blue border-gray-300"
                             />
                             <label htmlFor={optionId} className="ml-3 block text-sm text-gray-800">
@@ -227,7 +226,7 @@ const Contact: React.FC = () => {
                     {status === 'submitting' ? (
                       // Loading state UI.
                       <>
-                        <svg className="animate-spin h-5 w-5 text-brand-oxford-blue" xmlns="http://www.w.org/2000/svg" fill="none" viewBox="0 0 24 24" role="status" aria-label="Loading">
+                        <svg className="animate-spin h-5 w-5 text-brand-oxford-blue" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" role="status" aria-label="Loading">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
