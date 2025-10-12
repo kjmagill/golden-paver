@@ -81,30 +81,23 @@ const Contact: React.FC = () => {
     const { hp, ...payload } = formData;
     
     try {
-      // WORKAROUND: Send the data as a JSON string but with a 'text/plain' Content-Type.
-      // This avoids a CORS preflight request while still sending data that the
-      // Google Apps Script can easily parse using JSON.parse().
-      const response = await fetch(spreadsheetEndpoint, {
+      // Use 'no-cors' mode to submit the form without breaking on the cross-origin response.
+      // This is a "fire-and-forget" submission. We can't read the response to confirm success,
+      // but the data will be sent to the Apps Script. The script expects a JSON string,
+      // which is what we provide in the body.
+      await fetch(spreadsheetEndpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
+        mode: 'no-cors',
         body: JSON.stringify(payload),
       });
-      
-      const result = await response.json();
 
-      if (result.status === 'success') {
-          console.log('Form submission successful:', result.message);
-          setStatus('success');
-          setFormData({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
-      } else {
-          // Handle specific errors returned from the Apps Script
-          throw new Error(result.message || 'An unknown error occurred on the server.');
-      }
+      // Optimistically assume success if the fetch call itself doesn't throw a network error.
+      setStatus('success');
+      setFormData({ name: '', address: '', phone: '', service: '', message: '', hp: '' });
 
     } catch (error) {
-      console.error('Submission failed:', error);
+      // This catch block will only be triggered by network errors (e.g., user is offline).
+      console.error('Submission failed due to a network error:', error);
       setStatus('error');
     }
   };
