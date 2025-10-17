@@ -190,7 +190,7 @@ const Contact: React.FC = () => {
               </p>
               <p className="text-lg text-brand-powder-blue mt-2">
                 Prefer to talk? Call us for an even faster response: 
-                <a href="tel:609-849-8869" className="font-bold text-white hover:text-brand-gold-light transition-colors whitespace-nowrap"> 609-849-8869</a>
+                <a href="tel:609-408-5000" className="font-bold text-white hover:text-brand-gold-light transition-colors whitespace-nowrap"> 609-408-5000</a>
               </p>
             </div>
           </div>

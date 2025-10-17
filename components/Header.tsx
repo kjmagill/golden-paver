@@ -74,9 +74,9 @@ const Header: React.FC = () => {
               {link.label}
             </a>
           ))}
-          <a href="tel:609-849-8869" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
+          <a href="tel:609-408-5000" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
             <PhoneIcon className="w-4 h-4" />
-            <span>609-849-8869</span>
+            <span>609-408-5000</span>
           </a>
           <QuoteButton />
         </nav>
@@ -107,9 +107,9 @@ const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
-             <a href="tel:609-849-8869" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold py-2">
+             <a href="tel:609-408-5000" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold py-2">
               <PhoneIcon className="w-4 h-4" />
-              <span>609-849-8869</span>
+              <span>609-408-5000</span>
             </a>
             <QuoteButton isMobile={true} />
           </nav>

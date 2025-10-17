@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
               The <span className="text-brand-gold-light">Golden Standard</span> in Paver Restoration
             </h1>
             <p className="text-lg md:text-xl text-brand-powder-blue mb-8">
-              Professional cleaning, sealing, and restoration services that bring your outdoor spaces back to life.
+              Professional cleaning, sanding and sealing services that bring your pavers back to life.
             </p>
             <a 
               href="#contact" 
