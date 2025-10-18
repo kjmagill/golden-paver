@@ -14,9 +14,9 @@ interface FormData {
 }
 
 const serviceOptions = [
-  'Cleaning & Sealing',
+  'Deep Cleaning',
   'Polymeric Sanding',
-  'Repair & Restoration',
+  'Paver Sealing',
   'Other / Not Sure'
 ];
 

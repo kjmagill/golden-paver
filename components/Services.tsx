@@ -41,7 +41,7 @@ const services = [
   {
     icon: <SandingIcon />,
     title: 'Polymeric Sanding',
-    description: 'We replace old joint sand with new polymeric sand to prevent weed growth, resist erosion, and lock your pavers in place.'
+    description: 'Replacing old sand with new polymeric sand to prevent weed growth, resist erosion, and lock your pavers in place.'
   },
   {
     icon: <SealingIcon />,
