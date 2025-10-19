@@ -12,6 +12,12 @@
     <meta name="msapplication-TileImage" content="/ms-tile-icon-144x144.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow">
+    
+    <!-- 
+      Static meta tags serve as a robust fallback.
+      They are immediately available for search engine crawlers that do not execute JavaScript
+      and for users if the dynamic script fails for any reason (e.g., network error).
+    -->
     <link rel="canonical" href="https://www.goldenpaverrestorations.com/" />
     
     <!-- Security Headers -->
@@ -38,6 +44,61 @@
     <meta name="twitter:title" content="Golden Paver Restorations | #1 Paver Sealing & Repair in Cape May, Avalon & Stone Harbor, NJ" />
     <meta name="twitter:description" content="Restore your patio or driveway's beauty with Golden Paver Restorations. South Jersey's top-rated experts in paver sealing, cleaning & repair in Cape May, Avalon & Stone Harbor. Call 609-408-5000 for a FREE quote!" />
     <meta name="twitter:image" content="https://i.postimg.cc/3RxRYdp2/j2.jpg" />
+
+    <!-- 
+      Dynamic Meta Tag Loader Script
+      This script asynchronously fetches SEO metadata from `metadata.json` and updates the DOM.
+      It runs in the <head> without blocking page rendering. If it fails, the static meta tags above remain as a fallback.
+      This declarative mapping approach makes it easy to add or modify tags in the future.
+    -->
+    <script>
+      (async () => {
+        try {
+          const response = await fetch('/metadata.json');
+          if (!response.ok) throw new Error(`Failed to load metadata.json: ${response.statusText}`);
+          const meta = await response.json();
+
+          const mappings = [
+            // Page Title
+            { key: 'pageTitle', selector: 'title', attribute: 'textContent' },
+            { key: 'pageTitle', selector: 'meta[property="og:title"]', attribute: 'content' },
+            { key: 'pageTitle', selector: 'meta[name="twitter:title"]', attribute: 'content' },
+            
+            // Page Description
+            { key: 'pageDescription', selector: 'meta[name="description"]', attribute: 'content' },
+            { key: 'pageDescription', selector: 'meta[property="og:description"]', attribute: 'content' },
+            { key: 'pageDescription', selector: 'meta[name="twitter:description"]', attribute: 'content' },
+
+            // Canonical URL
+            { key: 'canonicalUrl', selector: 'link[rel="canonical"]', attribute: 'href' },
+            { key: 'canonicalUrl', selector: 'meta[property="og:url"]', attribute: 'content' },
+            { key: 'canonicalUrl', selector: 'meta[name="twitter:url"]', attribute: 'content' },
+
+            // Keywords
+            { key: 'keywords', selector: 'meta[name="keywords"]', attribute: 'content' },
+
+            // Images
+            { key: 'ogImage', selector: 'meta[property="og:image"]', attribute: 'content' },
+            { key: 'twitterImage', selector: 'meta[name="twitter:image"]', attribute: 'content' },
+          ];
+
+          mappings.forEach(({ key, selector, attribute }) => {
+            const element = document.querySelector(selector);
+            const value = meta[key];
+            if (element && value) {
+              if (attribute === 'textContent') {
+                element.textContent = value;
+              } else {
+                element.setAttribute(attribute, value);
+              }
+            }
+          });
+          
+        } catch (error) {
+          console.error("Error dynamically setting meta tags:", error);
+        }
+      })();
+    </script>
 
     <!-- Preload critical assets -->
     <link rel="preload" as="image" href="https://i.postimg.cc/76fBFnBV/d2.jpg">

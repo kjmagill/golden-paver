@@ -1,5 +1,11 @@
 {
   "name": "Golden Paver Restorations",
   "description": "A modern marketing website for Golden Paver Restorations, a premier pavement restoration company. The site showcases services, before/after galleries, and provides a contact form for free quotes.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "pageTitle": "Golden Paver Restorations | #1 Paver Sealing & Repair in Cape May, Avalon & Stone Harbor, NJ",
+  "pageDescription": "Restore your patio or driveway's beauty with Golden Paver Restorations. South Jersey's top-rated experts in paver sealing, cleaning & repair in Cape May, Avalon & Stone Harbor. Call 609-408-5000 for a FREE quote!",
+  "keywords": "paver restoration, paver sealing South Jersey, paver cleaning Cape May, polymeric sand installation, driveway repair Avalon, patio restoration Stone Harbor, hardscape maintenance, paver repair Wildwood, paver sealing company, paver sealing near me, paver company Cape May County, hardscape restoration NJ, patio sealing Avalon NJ, driveway sealing Stone Harbor",
+  "ogImage": "https://i.postimg.cc/3RxRYdp2/j2.jpg",
+  "twitterImage": "https://i.postimg.cc/3RxRYdp2/j2.jpg",
+  "canonicalUrl": "https://www.goldenpaverrestorations.com/"
 }

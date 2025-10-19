@@ -43,14 +43,19 @@ const Contact: React.FC = () => {
   const validateForm = (data: FormData): Partial<Record<keyof FormData, string>> => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
 
-    if (!data.name.trim()) newErrors.name = 'Name is required';
+    if (!data.name.trim()) {
+        newErrors.name = 'Name is required';
+    } else if (data.name.trim().length > 50) {
+        newErrors.name = 'Name must be 50 characters or less.';
+    }
+
     if (!data.address.trim()) newErrors.address = 'Address is required';
     
-    const phoneRegex = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const phoneRegex = /^(\+?1\s*[-\/\.]?)?(\(?\d{3}\)?)[-\s\/\.]?(\d{3})[-\s\/\.]?(\d{4})\s?((?:#|x\.?|ext\.?|extension)\s*\d+)?$/;
     if (!data.phone.trim()) {
         newErrors.phone = 'Phone number is required';
     } else if (!phoneRegex.test(data.phone)) {
-        newErrors.phone = 'Please enter a valid phone number';
+        newErrors.phone = 'Please enter a valid US phone number (e.g., 123-456-7890 x123)';
     }
 
     if (!data.service) {
@@ -59,7 +64,11 @@ const Contact: React.FC = () => {
         newErrors.service = 'Please select a valid service';
     }
 
-    if (!data.message.trim()) newErrors.message = 'Message is required';
+    if (!data.message.trim()) {
+        newErrors.message = 'Message is required';
+    } else if (data.message.trim().length > 1000) {
+        newErrors.message = 'Message must be 1000 characters or less.';
+    }
     
     return newErrors;
   };
@@ -212,7 +221,7 @@ const Contact: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-bold mb-2">Full Name</label>
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} onBlur={handleBlur} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.name ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} onBlur={handleBlur} maxLength={50} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.name ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />
                     {touched.name && errors.name && <p id="name-error" className="text-red-500 text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div>
@@ -257,7 +266,7 @@ const Contact: React.FC = () => {
                 </div>
                 <div className="mb-6">
                   <label htmlFor="message" className="block text-sm font-bold mb-2">Tell Us About Your Project</label>
-                  <textarea id="message" name="message" value={formData.message} onChange={handleChange} onBlur={handleBlur} rows={5} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}></textarea>
+                  <textarea id="message" name="message" value={formData.message} onChange={handleChange} onBlur={handleBlur} rows={5} maxLength={1000} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}></textarea>
                   {touched.message && errors.message && <p id="message-error" className="text-red-500 text-xs mt-1">{errors.message}</p>}
                 </div>
 
