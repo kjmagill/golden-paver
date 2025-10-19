@@ -107,22 +107,24 @@ const Contact: React.FC = () => {
 
     setStatus('submitting');
 
-    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbzVl6exqQ3bzkmnegYN2pOhLZPyAfccU-GsMk6WS3v8nfSPkLth-cuOhoGqWmtSuARl/exec';
+    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbzm5mq7fzV63JkxbTrSfBIIQSJUUH6dRijRIy0F2pMmR-oC4YNrZl7bA-HWEG94L_9c/exec';
 
     const { hp, ...payload } = formData;
     
+    // Use URLSearchParams to send data as 'application/x-www-form-urlencoded'.
+    // This is a standard way to post form data and is easily parsed by Google Apps Script.
+    const formBody = new URLSearchParams(payload as Record<string, string>);
+
     try {
-      // The Google Apps Script is expecting a JSON payload. We stringify the form data
-      // and send it with a 'text/plain' Content-Type. This is a common technique to
-      // avoid a CORS preflight (OPTIONS) request, which Google Apps Script web apps
-      // don't handle by default. The script can then parse this text back into a JSON object.
+      // We still use 'no-cors' mode. This is a "fire and forget" method.
+      // We can't confirm success from the server, but this is a common pattern for
+      // Google Apps Script endpoints to avoid CORS issues. We will assume success
+      // if the network request itself doesn't fail.
       await fetch(spreadsheetEndpoint, {
         method: 'POST',
         mode: 'no-cors',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
-        body: JSON.stringify(payload),
+        body: formBody,
+        // No 'Content-Type' header is needed; the browser sets it for URLSearchParams.
       });
 
       setStatus('success');
