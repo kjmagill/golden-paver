@@ -110,17 +110,19 @@ const Contact: React.FC = () => {
     const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbzVl6exqQ3bzkmnegYN2pOhLZPyAfccU-GsMk6WS3v8nfSPkLth-cuOhoGqWmtSuARl/exec';
 
     const { hp, ...payload } = formData;
-    const data = new FormData();
-    Object.keys(payload).forEach(key => {
-        // The cast is safe because we are iterating over keys of payload
-        data.append(key, payload[key as keyof typeof payload]);
-    });
     
     try {
+      // The Google Apps Script is expecting a JSON payload. We stringify the form data
+      // and send it with a 'text/plain' Content-Type. This is a common technique to
+      // avoid a CORS preflight (OPTIONS) request, which Google Apps Script web apps
+      // don't handle by default. The script can then parse this text back into a JSON object.
       await fetch(spreadsheetEndpoint, {
         method: 'POST',
         mode: 'no-cors',
-        body: data,
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(payload),
       });
 
       setStatus('success');
