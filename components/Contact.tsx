@@ -110,12 +110,17 @@ const Contact: React.FC = () => {
     const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbzVl6exqQ3bzkmnegYN2pOhLZPyAfccU-GsMk6WS3v8nfSPkLth-cuOhoGqWmtSuARl/exec';
 
     const { hp, ...payload } = formData;
+    const data = new FormData();
+    Object.keys(payload).forEach(key => {
+        // The cast is safe because we are iterating over keys of payload
+        data.append(key, payload[key as keyof typeof payload]);
+    });
     
     try {
       await fetch(spreadsheetEndpoint, {
         method: 'POST',
         mode: 'no-cors',
-        body: JSON.stringify(payload),
+        body: data,
       });
 
       setStatus('success');
