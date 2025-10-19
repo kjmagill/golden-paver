@@ -71,8 +71,8 @@ const Services: React.FC = () => {
           {services.map((service, index) => (
             // The `delay` prop creates a staggered animation effect, where each card fades in one after another.
             <FadeIn key={index} delay={index * 150}>
-              <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center transform transition-transform hover:-translate-y-2 group h-full">
-                <div className="flex justify-center mb-6 transition-transform duration-300 ease-in-out group-hover:scale-110 group-hover:-rotate-6">{service.icon}</div>
+              <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center h-full">
+                <div className="flex justify-center mb-6">{service.icon}</div>
                 <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-2">{service.title}</h3>
                 <p className="text-brand-slate-gray">{service.description}</p>
               </div>

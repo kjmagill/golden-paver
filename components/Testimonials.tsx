@@ -38,7 +38,7 @@ const Testimonials: React.FC = () => {
                 <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                     {testimonials.map((testimonial, index) => (
                         <FadeIn key={index} delay={index * 150}>
-                            <figure className="bg-brand-bg border border-gray-200 p-6 sm:p-8 rounded-lg shadow-lg transform transition-transform hover:-translate-y-2 flex flex-col h-full">
+                            <figure className="bg-brand-bg border border-gray-200 p-6 sm:p-8 rounded-lg shadow-lg flex flex-col h-full">
                                 <blockquote className="flex-grow">
                                 <p className="text-brand-slate-gray mb-6">"{testimonial.quote}"</p>
                                 </blockquote>
