@@ -36,6 +36,7 @@
     <meta property="og:title" content="Golden Paver Restorations | #1 Paver Sealing & Repair in Cape May, Avalon & Stone Harbor, NJ" />
     <meta property="og:description" content="Restore your patio or driveway's beauty with Golden Paver Restorations. South Jersey's top-rated experts in paver sealing, cleaning & repair in Cape May, Avalon & Stone Harbor. Call 609-408-5000 for a FREE quote!" />
     <meta property="og:image" content="https://i.postimg.cc/3RxRYdp2/j2.jpg" />
+    <meta property="og:image:alt" content="A worn paver driveway with weeds and discoloration, shown before professional restoration by Golden Paver Restorations." />
     <meta property="og:site_name" content="Golden Paver Restorations" />
 
     <!-- Twitter -->
@@ -44,6 +45,7 @@
     <meta name="twitter:title" content="Golden Paver Restorations | #1 Paver Sealing & Repair in Cape May, Avalon & Stone Harbor, NJ" />
     <meta name="twitter:description" content="Restore your patio or driveway's beauty with Golden Paver Restorations. South Jersey's top-rated experts in paver sealing, cleaning & repair in Cape May, Avalon & Stone Harbor. Call 609-408-5000 for a FREE quote!" />
     <meta name="twitter:image" content="https://i.postimg.cc/3RxRYdp2/j2.jpg" />
+    <meta name="twitter:image:alt" content="A worn paver driveway with weeds and discoloration, shown before professional restoration by Golden Paver Restorations." />
 
     <!-- 
       Dynamic Meta Tag Loader Script
@@ -79,7 +81,9 @@
 
             // Images
             { key: 'ogImage', selector: 'meta[property="og:image"]', attribute: 'content' },
+            { key: 'ogImageAlt', selector: 'meta[property="og:image:alt"]', attribute: 'content' },
             { key: 'twitterImage', selector: 'meta[name="twitter:image"]', attribute: 'content' },
+            { key: 'twitterImageAlt', selector: 'meta[name="twitter:image:alt"]', attribute: 'content' },
           ];
 
           mappings.forEach(({ key, selector, attribute }) => {
