@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 
 const PhoneIcon = ({ className }: { className?: string }) => (
@@ -10,6 +10,32 @@ const PhoneIcon = ({ className }: { className?: string }) => (
 const Header: React.FC = () => {
   // State to manage the visibility of the mobile navigation menu.
   const [isOpen, setIsOpen] = useState(false);
+
+  // Add a listener to close the mobile menu on window resize if it's open
+  // and the viewport becomes larger than the mobile breakpoint.
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isOpen]);
+
+  // Prevent body scroll when mobile menu is open for better UX
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { href: '#services', label: 'Services' },
@@ -81,40 +107,74 @@ const Header: React.FC = () => {
           <QuoteButton />
         </nav>
         <div className="lg:hidden">
-          {/* Hamburger menu button */}
+          {/* Animated Hamburger menu button */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
-            className="text-brand-powder-blue focus:outline-none" 
+            className="text-brand-powder-blue focus:outline-none p-1.5 z-20 relative" 
             aria-label="Toggle mobile menu"
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
-            </svg>
+            <div className="w-6 h-5 relative" aria-hidden="true">
+              <span className={`block absolute h-0.5 w-full rounded-full bg-current transition-all duration-300 ease-in-out ${isOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-0'}`}></span>
+              <span className={`block absolute h-0.5 w-full rounded-full bg-current transition-opacity duration-300 ease-in-out top-1/2 -translate-y-1/2 ${isOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+              <span className={`block absolute h-0.5 w-full rounded-full bg-current transition-all duration-300 ease-in-out ${isOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'bottom-0'}`}></span>
+            </div>
           </button>
         </div>
       </div>
-      {/* Mobile menu, rendered conditionally based on the `isOpen` state. */}
-      {isOpen && (
-        <div className="lg:hidden bg-brand-oxford-blue" id="mobile-menu">
-          <nav className="px-6 pt-2 pb-4 flex flex-col items-center space-y-2">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold block text-center py-2" onClick={(e) => {
+      
+      {/* Animated Mobile menu */}
+      <div 
+        id="mobile-menu"
+        className={`
+          absolute top-full left-0 right-0 bg-brand-oxford-blue lg:hidden overflow-hidden
+          transition-[max-height,opacity] duration-500 ease-in-out
+          ${isOpen ? 'max-h-screen' : 'max-h-0 opacity-0'}
+        `}
+      >
+        <nav className="px-6 pt-2 pb-24 flex flex-col items-center space-y-2">
+          {navLinks.map((link, index) => (
+            <a 
+              key={link.href} 
+              href={link.href} 
+              className={`
+                text-brand-powder-blue hover:text-brand-gold-light transition-all duration-300
+                font-semibold block text-center py-2
+                ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3 pointer-events-none'}
+              `}
+              style={{ transitionDelay: isOpen ? `${100 + index * 50}ms` : '0ms' }}
+              onClick={(e) => {
                 handleSmoothScroll(e);
                 setIsOpen(false); // Close menu on navigation
-              }}>
-                {link.label}
-              </a>
-            ))}
-             <a href="tel:609-408-5000" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold py-2">
-              <PhoneIcon className="w-4 h-4" />
-              <span>609-408-5000</span>
+              }}
+            >
+              {link.label}
             </a>
+          ))}
+           <a 
+              href="tel:609-408-5000" 
+              className={`
+                flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light 
+                transition-all duration-300 font-semibold py-2
+                ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3 pointer-events-none'}
+              `}
+              style={{ transitionDelay: isOpen ? `${100 + navLinks.length * 50}ms` : '0ms' }}
+            >
+            <PhoneIcon className="w-4 h-4" />
+            <span>609-408-5000</span>
+          </a>
+          <div 
+            className={`
+              w-full transition-all duration-300
+              ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3 pointer-events-none'}
+            `}
+            style={{ transitionDelay: isOpen ? `${100 + (navLinks.length + 1) * 50}ms` : '0ms' }}
+          >
             <QuoteButton isMobile={true} />
-          </nav>
-        </div>
-      )}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };
