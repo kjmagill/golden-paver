@@ -28,10 +28,10 @@ const Hero: React.FC = () => {
                   targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl text-lg transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-3 px-4 sm:px-8 rounded-lg shadow-xl text-sm sm:text-lg transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold"
             >
               <span className="font-display [text-shadow:0_1px_0_rgba(255,255,255,0.3)]">Request Your Free Estimate</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </a>
