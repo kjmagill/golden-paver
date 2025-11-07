@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   // and the viewport becomes larger than the mobile breakpoint.
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1280 && isOpen) {
+      if (window.innerWidth >= 1024 && isOpen) {
         setIsOpen(false);
       }
     };
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
           setIsOpen(false);
         }
       }}
-      className={`group inline-flex items-center justify-center gap-2 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
+      className={`group inline-flex items-center justify-center gap-2 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-4 xl:px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
     >
       <span className="font-display [text-shadow:0_1px_0_rgba(255,255,255,0.3)]">Get a Quote</span>
       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
@@ -91,10 +91,10 @@ const Header: React.FC = () => {
         <a href="/" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light transition-colors">
           <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
           <span className="font-brand font-bold text-base sm:text-xl tracking-wider uppercase leading-tight bg-gradient-to-r from-brand-gold-light to-brand-gold bg-clip-text text-transparent">
-            Golden Paver<span className="hidden sm:inline"> Restorations</span>
+            Golden Paver<span className="hidden xl:inline"> Restorations</span>
           </span>
         </a>
-        <nav className="hidden xl:flex items-center space-x-10">
+        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-10">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
               {link.label}
@@ -102,11 +102,11 @@ const Header: React.FC = () => {
           ))}
           <a href="tel:609-408-5000" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
             <PhoneIcon className="w-4 h-4" />
-            <span>609-408-5000</span>
+            <span className="hidden xl:inline">609-408-5000</span>
           </a>
           <QuoteButton />
         </nav>
-        <div className="xl:hidden">
+        <div className="lg:hidden">
           {/* Animated Hamburger menu button */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
@@ -128,7 +128,7 @@ const Header: React.FC = () => {
       <div 
         id="mobile-menu"
         className={`
-          absolute top-full left-0 right-0 bg-brand-oxford-blue xl:hidden overflow-hidden
+          absolute top-full left-0 right-0 bg-brand-oxford-blue lg:hidden overflow-hidden
           transition-[max-height,opacity] duration-500 ease-in-out
           ${isOpen ? 'max-h-screen' : 'max-h-0 opacity-0'}
         `}
