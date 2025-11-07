@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   // and the viewport becomes larger than the mobile breakpoint.
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024 && isOpen) {
+      if (window.innerWidth >= 1280 && isOpen) {
         setIsOpen(false);
       }
     };
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
             Golden Paver<span className="hidden sm:inline"> Restorations</span>
           </span>
         </a>
-        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-10">
+        <nav className="hidden xl:flex items-center space-x-10">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
               {link.label}
@@ -106,7 +106,7 @@ const Header: React.FC = () => {
           </a>
           <QuoteButton />
         </nav>
-        <div className="lg:hidden">
+        <div className="xl:hidden">
           {/* Animated Hamburger menu button */}
           <button 
             onClick={() => setIsOpen(!isOpen)} 
@@ -128,7 +128,7 @@ const Header: React.FC = () => {
       <div 
         id="mobile-menu"
         className={`
-          absolute top-full left-0 right-0 bg-brand-oxford-blue lg:hidden overflow-hidden
+          absolute top-full left-0 right-0 bg-brand-oxford-blue xl:hidden overflow-hidden
           transition-[max-height,opacity] duration-500 ease-in-out
           ${isOpen ? 'max-h-screen' : 'max-h-0 opacity-0'}
         `}
