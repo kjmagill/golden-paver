@@ -63,7 +63,7 @@ const Header: React.FC = () => {
     }
   };
 
-  // A reusable button component for the "Get a Free Quote" call to action.
+  // A reusable button component for the "Get a Quote" call to action.
   const QuoteButton = ({ isMobile = false }: { isMobile?: boolean }) => (
     <a 
       href="#contact" 
@@ -74,9 +74,9 @@ const Header: React.FC = () => {
           setIsOpen(false);
         }
       }}
-      className={`group inline-flex items-center justify-center gap-2 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
+      className={`group inline-flex items-center justify-center gap-2 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
     >
-      <span className="[text-shadow:0_1px_1px_rgba(0,0,0,0.25)]">Get a Free Quote</span>
+      <span className="font-display [text-shadow:0_1px_0_rgba(255,255,255,0.3)]">Get a Quote</span>
       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
       </svg>
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
             Golden Paver<span className="hidden sm:inline"> Restorations</span>
           </span>
         </a>
-        <nav className="hidden lg:flex items-center space-x-6">
+        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-10">
           {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
               {link.label}
