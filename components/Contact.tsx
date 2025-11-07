@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import FadeIn from './FadeIn';
 
 // Defines the possible states of a form submission process.
@@ -34,6 +34,11 @@ const Contact: React.FC = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   // `touched` tracks which fields the user has interacted with.
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
+  // Holds a form-level error message announced on submission failure.
+  const [formError, setFormError] = useState<string | null>(null);
+  // A ref to the form element for programmatic focus management.
+  const formRef = useRef<HTMLFormElement>(null);
+
 
   /**
    * Performs validation on the entire form data object.
@@ -104,8 +109,17 @@ const Contact: React.FC = () => {
     setTouched({ name: true, address: true, phone: true, service: true, message: true });
 
     if (Object.keys(validationErrors).length > 0) {
-        return; // Stop submission if there are errors
+        setFormError('Please correct the errors highlighted below.');
+        // ACCESSIBILITY: Programmatically focus the first field with an error.
+        // A timeout ensures the DOM has updated with error messages before focusing.
+        setTimeout(() => {
+            const firstErrorField = Object.keys(validationErrors)[0] as keyof FormData;
+            const elementToFocus = formRef.current?.querySelector<HTMLElement>(`[name="${firstErrorField}"]`);
+            elementToFocus?.focus();
+        }, 100);
+        return;
     }
+    setFormError(null);
 
     // Honeypot check: If this field has a value, it's likely a bot.
     if (formData.hp) {
@@ -153,7 +167,7 @@ const Contact: React.FC = () => {
   const renderStatusMessage = () => {
     if (status === 'success') {
       return (
-        <div className="text-center py-10 flex flex-col items-center" role="alert" aria-live="polite">
+        <div className="text-center py-10 flex flex-col items-center" role="alert">
           <div className="mb-4">
             <svg className="w-16 h-16 text-brand-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
               <circle 
@@ -184,7 +198,7 @@ const Contact: React.FC = () => {
     }
     if (status === 'error') {
        return (
-        <div className="text-center py-10" role="alert" aria-live="assertive">
+        <div className="text-center py-10" role="alert">
           <h3 className="text-2xl font-bold mb-2 text-red-600">Submission Failed</h3>
           <p className="mb-6">We're sorry, but something went wrong. This can sometimes be caused by pop-up or ad blockers. Please try disabling them, refresh the page, and submit the form again. If the issue persists, please try again later or give us a call.</p>
            <button onClick={resetForm} className="bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:brightness-110 transition-all [text-shadow:0_1px_1px_rgba(0,0,0,0.25)]">
@@ -217,28 +231,36 @@ const Contact: React.FC = () => {
           <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-6 sm:p-8 rounded-lg shadow-2xl">
             {status === 'success' || status === 'error' ? renderStatusMessage() : (
               // The form itself.
-              <form onSubmit={handleSubmit} noValidate>
+              <form ref={formRef} onSubmit={handleSubmit} noValidate>
+                {/* Form-level error message for screen readers and keyboard users */}
+                {formError && (
+                  <div role="alert" className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+                    <p>{formError}</p>
+                  </div>
+                )}
+                <p className="text-sm text-gray-600 mb-6 italic">Fields marked with <span className="text-red-500 not-italic font-bold">*</span> are required.</p>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-bold mb-2">Full Name</label>
+                    <label htmlFor="name" className="block text-sm font-bold mb-2">Full Name <span className="text-red-500">*</span></label>
                     <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} onBlur={handleBlur} maxLength={50} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.name ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />
                     {touched.name && errors.name && <p id="name-error" className="text-red-500 text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-bold mb-2">Phone Number</label>
+                    <label htmlFor="phone" className="block text-sm font-bold mb-2">Phone Number <span className="text-red-500">*</span></label>
                     <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.phone ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} />
                     {touched.phone && errors.phone && <p id="phone-error" className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                   </div>
                 </div>
                 <div className="mb-6">
-                  <label htmlFor="address" className="block text-sm font-bold mb-2">Service Address</label>
+                  <label htmlFor="address" className="block text-sm font-bold mb-2">Service Address <span className="text-red-500">*</span></label>
                   <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} onBlur={handleBlur} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.address ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.address} aria-describedby={errors.address ? "address-error" : undefined} />
                   {touched.address && errors.address && <p id="address-error" className="text-red-500 text-xs mt-1">{errors.address}</p>}
                 </div>
                 {/* Service Type Selection */}
                 <div className="mb-6">
                    <fieldset aria-describedby={errors.service ? "service-error" : undefined}>
-                    <legend className="block text-sm font-bold mb-2">Service of Interest</legend>
+                    <legend className="block text-sm font-bold mb-2">Service of Interest <span className="text-red-500">*</span></legend>
                     <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
                       {serviceOptions.map((option) => {
                         const optionId = option.replace(/[\s/&]+/g, '-').toLowerCase();
@@ -265,7 +287,7 @@ const Contact: React.FC = () => {
                   {touched.service && errors.service && <p id="service-error" className="text-red-500 text-xs mt-2">{errors.service}</p>}
                 </div>
                 <div className="mb-6">
-                  <label htmlFor="message" className="block text-sm font-bold mb-2">Tell Us About Your Project</label>
+                  <label htmlFor="message" className="block text-sm font-bold mb-2">Tell Us About Your Project <span className="text-red-500">*</span></label>
                   <textarea id="message" name="message" value={formData.message} onChange={handleChange} onBlur={handleBlur} rows={5} maxLength={1000} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}></textarea>
                   {touched.message && errors.message && <p id="message-error" className="text-red-500 text-xs mt-1">{errors.message}</p>}
                 </div>
