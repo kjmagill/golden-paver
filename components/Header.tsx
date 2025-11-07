@@ -88,7 +88,7 @@ const Header: React.FC = () => {
     // 'z-50' ensures it appears above other page content.
     <header className="bg-brand-oxford-blue sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
-        <a href="index.html" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light transition-colors">
+        <a href="/" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light transition-colors">
           <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
           <span className="font-brand font-bold text-base sm:text-xl tracking-wider uppercase leading-tight bg-gradient-to-r from-brand-gold-light to-brand-gold bg-clip-text text-transparent">
             Golden Paver<span className="hidden sm:inline"> Restorations</span>
