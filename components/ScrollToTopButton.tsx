@@ -47,7 +47,7 @@ const ScrollToTopButton: React.FC = () => {
       aria-label="Scroll to top"
       // Conditionally apply classes for visibility and transitions.
       // The button fades and slides in from the bottom when visible.
-      className={`fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 bg-brand-gold text-brand-oxford-blue p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold active:scale-95 ${
+      className={`fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue p-2 sm:p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:brightness-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-gold active:scale-95 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >

@@ -171,7 +171,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           {/* Slider Handle */}
           <div 
             ref={handleRef}
-            className={`absolute top-0 bottom-0 w-1 bg-white/70 cursor-ew-resize backdrop-blur-sm transition-colors duration-300 outline-none group-focus:bg-brand-gold ${isDragging ? 'bg-brand-gold' : 'group-hover:bg-brand-gold'}`}
+            className={`absolute top-0 bottom-0 w-1 bg-white/70 cursor-ew-resize backdrop-blur-sm transition-colors duration-300 outline-none group-focus:bg-brand-gold-light ${isDragging ? 'bg-brand-gold-light' : 'group-hover:bg-brand-gold-light'}`}
             // The handle's `left` position is dynamically updated based on the state.
             style={{ left: `calc(${sliderPosition}% - 0.5px)` }}
             onMouseDown={handleMouseDown}
@@ -180,7 +180,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             tabIndex={0} // Makes the handle focusable.
             role="presentation" // The main container has the slider role
           >
-            <div className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center shadow-lg border-2 border-white/50 transition-all duration-300 group-focus:scale-110 group-focus:border-brand-gold ${isDragging ? 'scale-110 border-brand-gold' : 'group-hover:scale-110 group-hover:border-brand-gold'}`}>
+            <div className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center shadow-lg border-2 border-white/50 transition-all duration-300 group-focus:scale-110 group-focus:border-brand-gold-light ${isDragging ? 'border-brand-gold-light' : 'group-hover:border-brand-gold-light'}`}>
               <svg className={`w-5 h-5 sm:w-6 sm:w-6 text-brand-oxford-blue/80 transition-colors duration-300 group-focus:text-brand-oxford-blue ${isDragging ? 'text-brand-oxford-blue' : 'group-hover:text-brand-oxford-blue'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
               </svg>
