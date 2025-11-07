@@ -54,11 +54,22 @@
       This declarative mapping approach makes it easy to add or modify tags in the future.
     -->
     <script>
-      (async () => {
+      (() => {
         try {
-          const response = await fetch('/metadata.json');
-          if (!response.ok) throw new Error(`Failed to load metadata.json: ${response.statusText}`);
-          const meta = await response.json();
+          // The metadata is embedded directly to avoid a failing network request, fixing the "Failed to fetch" error.
+          const meta = {
+            "name": "Golden Paver Restorations",
+            "description": "A modern marketing website for Golden Paver Restorations, a premier pavement restoration company. The site showcases services, before/after galleries, and provides a contact form for free quotes.",
+            "requestFramePermissions": [],
+            "pageTitle": "Golden Paver Restorations | #1 Paver Sealing & Repair in Cape May, Avalon & Stone Harbor, NJ",
+            "pageDescription": "Restore your patio or driveway's beauty with Golden Paver Restorations. South Jersey's top-rated experts in paver sealing, cleaning & repair in Cape May, Avalon & Stone Harbor. Call 609-408-5000 for a FREE quote!",
+            "keywords": "paver restoration, paver sealing South Jersey, paver cleaning Cape May, polymeric sand installation, driveway repair Avalon, patio restoration Stone Harbor, hardscape maintenance, paver repair Wildwood, paver sealing company, paver sealing near me, paver company Cape May County, hardscape restoration NJ, patio sealing Avalon NJ, driveway sealing Stone Harbor",
+            "ogImage": "https://i.postimg.cc/3RxRYdp2/j2.jpg",
+            "ogImageAlt": "A worn paver driveway with weeds and discoloration, shown before professional restoration by Golden Paver Restorations.",
+            "twitterImage": "https://i.postimg.cc/3RxRYdp2/j2.jpg",
+            "twitterImageAlt": "A worn paver driveway with weeds and discoloration, shown before professional restoration by Golden Paver Restorations.",
+            "canonicalUrl": "https://www.goldenpaverrestorations.com/"
+          };
 
           const mappings = [
             // Page Title
