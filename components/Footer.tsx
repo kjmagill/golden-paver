@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
               </svg>
             </a>
             <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" className="text-brand-powder-blue hover:text-brand-gold-light transition-all duration-300 transform hover:-translate-y-1">
-              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <svg className="w-7 h-7" viewBox="0 -2 24 28" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-4.484 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
               </svg>
             </a>
@@ -97,10 +97,9 @@ const Footer: React.FC = () => {
                 &copy; {new Date().getFullYear()} Golden Paver Restorations, LLC. All Rights Reserved.
             </p>
             <p className="text-sm text-brand-slate-gray flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1">
-              <span>Designed by</span>
-              <a href="https://kjmagill.com" className="hover:text-brand-gold-light transition-colors">
-                KJ Magill
-              </a>
+              <span>Designed by
+                <a href="https://kjmagill.com" className="hover:text-brand-gold-light transition-colors"> KJ Magill</a>
+              </span>
               <span>|</span>
               <a href="https://capemaywebdesign.com" className="hover:text-brand-gold-light transition-colors">
                 capemaywebdesign.com
