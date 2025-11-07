@@ -176,7 +176,7 @@ const Contact: React.FC = () => {
           </div>
           <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
           <p className="mb-6">Your request has been submitted successfully. We will be in touch within 24 hours.</p>
-          <button onClick={resetForm} className="bg-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:bg-brand-gold-light transition-colors">
+          <button onClick={resetForm} className="bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:brightness-110 transition-all [text-shadow:0_1px_1px_rgba(0,0,0,0.25)]">
             Send Another Message
           </button>
         </div>
@@ -187,7 +187,7 @@ const Contact: React.FC = () => {
         <div className="text-center py-10" role="alert" aria-live="assertive">
           <h3 className="text-2xl font-bold mb-2 text-red-600">Submission Failed</h3>
           <p className="mb-6">We're sorry, but something went wrong. This can sometimes be caused by pop-up or ad blockers. Please try disabling them, refresh the page, and submit the form again. If the issue persists, please try again later or give us a call.</p>
-           <button onClick={resetForm} className="bg-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:bg-brand-gold-light transition-colors">
+           <button onClick={resetForm} className="bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-6 rounded-lg shadow-md hover:brightness-110 transition-all [text-shadow:0_1px_1px_rgba(0,0,0,0.25)]">
             Try Again
           </button>
         </div>
@@ -279,7 +279,7 @@ const Contact: React.FC = () => {
                   <button 
                     type="submit" 
                     disabled={status === 'submitting'} 
-                    className="w-full group inline-flex items-center justify-center gap-3 bg-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg active:bg-brand-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-brand-gold disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+                    className="w-full group inline-flex items-center justify-center gap-3 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-brand-gold disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
                   >
                     {status === 'submitting' ? (
                       // Loading state UI.
@@ -293,7 +293,7 @@ const Contact: React.FC = () => {
                     ) : (
                       // Default button UI.
                       <>
-                        <span>Submit Request</span>
+                        <span className="[text-shadow:0_1px_1px_rgba(0,0,0,0.25)]">Submit Request</span>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>

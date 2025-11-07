@@ -74,9 +74,9 @@ const Header: React.FC = () => {
           setIsOpen(false);
         }
       }}
-      className={`group inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-oxford-blue font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
+      className={`group inline-flex items-center justify-center gap-2 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
     >
-      <span>Get a Free Quote</span>
+      <span className="[text-shadow:0_1px_1px_rgba(0,0,0,0.25)]">Get a Free Quote</span>
       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
       </svg>
@@ -88,9 +88,9 @@ const Header: React.FC = () => {
     // 'z-50' ensures it appears above other page content.
     <header className="bg-brand-oxford-blue sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
-        <a href="index.html" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light hover:text-brand-gold transition-colors">
+        <a href="index.html" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light transition-colors">
           <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
-          <span className="font-brand font-bold text-base sm:text-xl tracking-wider uppercase leading-tight">
+          <span className="font-brand font-bold text-base sm:text-xl tracking-wider uppercase leading-tight bg-gradient-to-r from-brand-gold-light to-brand-gold bg-clip-text text-transparent">
             Golden Paver<span className="hidden sm:inline"> Restorations</span>
           </span>
         </a>

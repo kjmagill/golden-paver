@@ -13,6 +13,10 @@ const Logo: React.FC<{ className?: string }> = ({ className }) => {
         Here, we define an SVG filter that will be applied to the paver shapes.
       */}
       <defs>
+        <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#D5AD36" />
+            <stop offset="100%" stopColor="#CA9703" />
+        </linearGradient>
         <filter id="paverTexture">
           {/* 
             `feTurbulence` creates an image using the Perlin turbulence function.
@@ -42,8 +46,8 @@ const Logo: React.FC<{ className?: string }> = ({ className }) => {
           />
         </filter>
       </defs>
-      {/* Apply the texture filter to the group of paver shapes */}
-      <g fill="currentColor" filter="url(#paverTexture)">
+      {/* Apply the texture filter and new gradient to the group of paver shapes */}
+      <g fill="url(#logo-gradient)" filter="url(#paverTexture)">
         {/* These rectangles represent the individual pavers in the logo. */}
         <rect x="0" y="0" width="27" height="27" rx="4" />
         <rect x="30" y="0" width="70" height="27" rx="4" />
