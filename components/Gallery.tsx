@@ -128,25 +128,25 @@ interface GalleryItem {
 
 const galleryItems: GalleryItem[] = [
   { 
-    before: 'https://i.postimg.cc/Wp7B0XQC/f2.jpg', 
-    after: 'https://i.postimg.cc/yxn2B8mg/f1.jpg', 
+    before: 'https://i.postimg.cc/yxn2B8mg/f1.jpg', 
+    after: 'https://i.postimg.cc/Wp7B0XQC/f2.jpg', 
     title: 'Patio Transformation',
-    beforeAlt: 'A grimy, moss-covered brick paver patio before professional pressure washing and restoration.',
-    afterAlt: 'A beautifully clean and vibrant brick paver patio after sealing service in Stone Harbor, NJ.'
+    beforeAlt: 'A beautifully clean and vibrant brick paver patio after sealing service in Stone Harbor, NJ.',
+    afterAlt: 'A grimy, moss-covered brick paver patio before professional pressure washing and restoration.'
   },
   { 
-    before: 'https://i.postimg.cc/3RxRYdp2/j2.jpg', 
-    after: 'https://i.postimg.cc/9MQMCrTr/j1.jpg', 
+    before: 'https://i.ibb.co/nND7yd90/brick-before.jpg', 
+    after: 'https://i.ibb.co/8gKKpn14/brick-after.jpg', 
     title: 'Driveway Revival',
     beforeAlt: 'A faded and stained paver driveway with weeds growing in the joints before restoration.',
     afterAlt: 'A revived paver driveway with rich color and clean joint lines after polymeric sanding and sealing.'
   },
   { 
-    before: 'https://i.postimg.cc/YCSLtDHB/h2.jpg', 
-    after: 'https://i.postimg.cc/rFMtPFZh/h1.jpg', 
+    before: 'https://i.postimg.cc/rFMtPFZh/h1.jpg', 
+    after: 'https://i.postimg.cc/YCSLtDHB/h2.jpg', 
     title: 'Walkway Restoration',
-    beforeAlt: 'An old paver walkway, discolored and covered in dirt before cleaning services.',
-    afterAlt: 'A pristine and welcoming paver walkway, looking brand new after a deep clean and seal restoration.'
+    beforeAlt: 'A pristine and welcoming paver walkway, looking brand new after a deep clean and seal restoration.',
+    afterAlt: 'An old paver walkway, discolored and covered in dirt before cleaning services.'
   },
 ];
 
@@ -156,7 +156,6 @@ const galleryItems: GalleryItem[] = [
  * feature to view a larger version of each slider for a more detailed look.
  */
 const Gallery: React.FC = () => {
-  // State to manage the currently selected gallery item for the modal view.
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
   const openModal = (item: GalleryItem) => {
@@ -168,21 +167,27 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <section id="gallery" className="py-16 sm:py-20 bg-brand-bg">
+    <section id="gallery" className="py-24 sm:py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">Proven Results</h2>
-            <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
-              See the dramatic difference a professional restoration can make.
+          <div className="text-center mb-16 sm:mb-20">
+            <span className="text-brand-gold font-display font-bold text-sm tracking-[0.2em] uppercase mb-4 block">Our Portfolio</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-brand-oxford-blue tracking-tight">Proven Results</h2>
+            <div className="w-20 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+            <p className="text-lg text-brand-slate-gray mt-6 max-w-2xl mx-auto leading-relaxed">
+              Explore our recent transformations across South Jersey and witness the dramatic difference our expertise makes.
             </p>
           </div>
         </FadeIn>
-        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-10 sm:gap-12">
+        
+        <div className="grid lg:grid-cols-3 gap-12 xl:gap-16">
           {galleryItems.map((item, index) => (
-            <FadeIn key={index} delay={index * 150}>
-              <div className="flex flex-col items-center">
-                <div className="relative w-full">
+            <FadeIn key={index} delay={index * 150} direction="up">
+              <div className="group flex flex-col h-full">
+                <div 
+                  className="relative cursor-zoom-in overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+                  onClick={() => openModal(item)}
+                >
                   <BeforeAfterSlider 
                     before={item.before} 
                     after={item.after}
@@ -190,32 +195,29 @@ const Gallery: React.FC = () => {
                     afterAlt={item.afterAlt}
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-brand-oxford-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
+                    <div className="bg-white/90 backdrop-blur-sm p-3 rounded-full scale-50 group-hover:scale-100 transition-transform duration-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-oxford-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold font-display text-brand-oxford-blue mt-6">{item.title}</h3>
-                {/* 
-                  This button is displayed below the title on large screens ('lg:inline-flex').
-                  This placement creates a clear visual hierarchy for the gallery item card.
-                */}
-                <button
-                  onClick={() => openModal(item)}
-                  className="hidden lg:inline-flex items-center gap-2 bg-brand-oxford-blue text-white font-semibold py-2 px-5 rounded-lg shadow-md mt-4 transition-all duration-300 ease-in-out hover:bg-opacity-90 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-bg focus:ring-brand-gold"
-                  aria-label={`View larger version of ${item.title}`}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                  </svg>
-                  View Larger
-                </button>
+                
+                <div className="mt-8">
+                  <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-2">{item.title}</h3>
+                  <div className="flex items-center gap-2 text-brand-gold text-sm font-semibold uppercase tracking-wider">
+                    <span>Cape May County, NJ</span>
+                    <span className="w-1 h-1 bg-brand-gold rounded-full"></span>
+                    <span>Restoration</span>
+                  </div>
+                </div>
               </div>
             </FadeIn>
           ))}
         </div>
       </div>
       
-      {/* 
-        The Modal component is rendered here. It is controlled by the `selectedItem` state.
-        When `selectedItem` is not null, the modal is shown.
-      */}
       <Modal show={!!selectedItem} onClose={closeModal}>
         {selectedItem && (
           <div className="w-full max-w-4xl p-2 sm:p-4">
@@ -226,6 +228,10 @@ const Gallery: React.FC = () => {
                 afterAlt={selectedItem.afterAlt}
                 loading="eager"
             />
+            <div className="bg-brand-oxford-blue/90 backdrop-blur-md p-6 mt-4 rounded-xl border border-white/10 text-center">
+               <h4 className="text-xl font-bold font-display text-white mb-1">{selectedItem.title}</h4>
+               <p className="text-brand-powder-blue text-sm">Full deep clean, polymeric sanding, and premium seal application.</p>
+            </div>
           </div>
         )}
       </Modal>

@@ -69,15 +69,14 @@ const Header: React.FC = () => {
       href="#contact" 
       onClick={(e) => {
         handleSmoothScroll(e);
-        // If it's the mobile version of the button, close the menu after clicking.
         if (isMobile) {
           setIsOpen(false);
         }
       }}
-      className={`group inline-flex items-center justify-center gap-2 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-2 px-4 xl:px-6 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-2' : ''}`}
+      className={`group inline-flex items-center justify-center gap-2 bg-brand-gold text-brand-oxford-blue font-bold py-2 px-5 xl:px-6 rounded-lg shadow-[0_4px_10px_rgba(202,151,3,0.2)] transition-all duration-300 ease-in-out hover:bg-brand-gold-light hover:shadow-[0_8px_20px_rgba(202,151,3,0.4)] hover:-translate-y-0.5 active:scale-95 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-oxford-blue focus:ring-brand-gold ${isMobile ? 'w-full mt-4' : ''}`}
     >
-      <span className="font-display [text-shadow:0_1px_0_rgba(255,255,255,0.3)]">Get a Quote</span>
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+      <span className="font-display uppercase tracking-widest text-[11px] xl:text-xs">Get a Quote</span>
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
       </svg>
     </a>
@@ -86,23 +85,37 @@ const Header: React.FC = () => {
   return (
     // The header is 'sticky' and positioned at 'top-0' to keep it fixed at the top of the viewport during scroll.
     // 'z-50' ensures it appears above other page content.
-    <header className="bg-brand-oxford-blue sticky top-0 z-50 shadow-lg">
-      <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
-        <a href="/" className="flex items-center gap-2 sm:gap-3 text-brand-gold-light transition-colors">
-          <Logo className="w-8 h-8 sm:w-9 sm:h-9" />
-          <span className="font-brand font-bold text-base sm:text-xl tracking-wider uppercase leading-tight bg-gradient-to-r from-brand-gold-light to-brand-gold bg-clip-text text-transparent">
-            Golden Paver<span className="hidden xl:inline"> Restorations</span>
+    <header className="bg-brand-oxford-blue/95 backdrop-blur-md sticky top-0 z-50 border-b border-brand-gold/10 shadow-xl">
+      <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="/" className="flex items-center gap-2 text-brand-gold-light group transition-all duration-300 flex-shrink-0">
+          <div className="relative">
+            <Logo className="w-9 h-9 sm:w-11 sm:h-11 transition-transform duration-500 group-hover:rotate-[360deg]" />
+            <div className="absolute inset-0 bg-brand-gold/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+          </div>
+          <span className="font-brand font-bold text-base sm:text-2xl tracking-[0.02em] uppercase leading-tight flex flex-row items-center">
+            <span className="text-brand-gold-light">Golden</span>
+            <span className="text-brand-gold-light ml-1.5">Paver</span>
+            <span className="text-brand-gold-light/80 xl:inline hidden ml-1.5">Restorations</span>
           </span>
         </a>
-        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-10">
+        <nav className="hidden lg:flex items-center space-x-5 xl:space-x-8">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
+            <a 
+              key={link.href} 
+              href={link.href} 
+              onClick={handleSmoothScroll} 
+              className="relative text-brand-powder-blue hover:text-white transition-colors font-display font-bold text-[11px] xl:text-xs tracking-[0.15em] uppercase group"
+            >
               {link.label}
+              <span className="absolute -bottom-1.5 left-0 w-0 h-0.5 bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
-          <a href="tel:609-408-5000" className="flex items-center gap-2 text-brand-powder-blue hover:text-brand-gold-light transition-colors font-semibold">
-            <PhoneIcon className="w-4 h-4" />
-            <span className="hidden xl:inline">609-408-5000</span>
+          <div className="h-5 w-px bg-brand-gold/15"></div>
+          <a href="tel:609-408-5000" className="flex items-center gap-2 text-white hover:text-brand-gold-light transition-all duration-300 font-display font-black group">
+            <div className="bg-brand-gold/10 p-1.5 rounded-lg group-hover:bg-brand-gold group-hover:text-brand-oxford-blue transition-colors">
+              <PhoneIcon className="w-3.5 h-3.5" />
+            </div>
+            <span className="hidden xl:inline text-[11px] tracking-widest">609-408-5000</span>
           </a>
           <QuoteButton />
         </nav>

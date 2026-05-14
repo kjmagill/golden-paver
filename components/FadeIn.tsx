@@ -1,84 +1,54 @@
-import React, { useState, useRef, useEffect, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+import { motion } from 'motion/react';
 
 interface FadeInProps {
   children: ReactNode;
   delay?: number;
   direction?: 'up' | 'down' | 'left' | 'right';
   className?: string;
+  duration?: number;
 }
 
 /**
  * A reusable component that fades in its children when they scroll into the viewport.
+ * Uses motion/react for high-performance animations and standard compliance.
  */
-const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, direction = 'up', className = '' }) => {
-  // `isInView` tracks whether the component is currently visible in the viewport.
-  const [isInView, setIsInView] = useState(false);
-  // `ref` is used to get a direct reference to the component's root DOM element.
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    // The IntersectionObserver API provides a way to asynchronously observe changes
-    // in the intersection of a target element with an ancestor element or with a
-    // top-level document's viewport.
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // `entry.isIntersecting` is true if the element is at least partially visible.
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          // Once the element is in view and the animation is triggered, we can stop observing it.
-          // This ensures the animation only runs once.
-          observer.unobserve(element);
-        }
-      },
-      {
-        // `threshold: 0.1` means the callback will trigger when 10% of the element is visible.
-        threshold: 0.1,
+const FadeIn: React.FC<FadeInProps> = ({ 
+  children, 
+  delay = 0, 
+  direction = 'up', 
+  className = '',
+  duration = 0.8
+}) => {
+  // Map directions to initial motion states
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: direction === 'up' ? 30 : direction === 'down' ? -30 : 0,
+      x: direction === 'left' ? 30 : direction === 'right' ? -30 : 0,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      transition: {
+        duration: duration,
+        delay: delay / 1000, // Convert ms to s for motion
+        ease: [0.21, 0.47, 0.32, 0.98], // Custom cubic-bezier for a premium feel
       }
-    );
-
-    // Start observing the component's DOM element.
-    observer.observe(element);
-
-    // Cleanup function: stop observing the element when the component unmounts.
-    return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
-    };
-  }, []);
-
-  /**
-   * Determines the initial transform style based on the `direction` prop.
-   * This creates the "slide-in" effect from a specific direction.
-   */
-  const getInitialTransform = () => {
-    switch (direction) {
-      case 'up': return 'translate-y-5';
-      case 'down': return '-translate-y-5';
-      case 'left': return 'translate-x-5';
-      case 'right': return '-translate-x-5';
-      default: return '';
     }
   };
 
-  // Base classes for the transition effect.
-  const baseClasses = `transition-all duration-700 ease-out`;
-  // Initial state classes: transparent and translated off-screen.
-  const initialClasses = `opacity-0 ${getInitialTransform()}`;
-  // Final state classes: fully opaque and in its final position.
-  const finalClasses = 'opacity-100 translate-y-0 translate-x-0';
-  
-  // Conditionally apply classes based on whether the component is in view.
-  // The 'fade-in-element' class is added to allow targeting via CSS for accessibility overrides (e.g., prefers-reduced-motion).
-  const combinedClasses = `fade-in-element ${baseClasses} ${isInView ? finalClasses : initialClasses} ${className}`;
-
   return (
-    <div ref={ref} className={combinedClasses} style={{ transitionDelay: `${delay}ms` }}>
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={variants}
+      className={className}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 };
 

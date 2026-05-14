@@ -57,24 +57,37 @@ const services = [
  */
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-16 sm:py-20 bg-brand-bg">
-      <div className="container mx-auto px-6">
+    <section id="services" className="py-24 sm:py-32 bg-gray-50/50 relative overflow-hidden">
+      {/* Subtle Background Accent */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent"></div>
+      
+      <div className="container mx-auto px-6 relative z-10">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold font-display text-brand-oxford-blue">Our Services</h2>
-            <p className="text-lg text-brand-slate-gray mt-4 max-w-2xl mx-auto">
-              We offer a comprehensive suite of services in Cape May County.
+          <div className="text-center mb-16 sm:mb-20">
+            <span className="text-brand-gold font-display font-bold text-sm tracking-[0.2em] uppercase mb-4 block">Proven Process</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-brand-oxford-blue tracking-tight">Our Restoration Services</h2>
+            <div className="w-20 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+            <p className="text-lg text-brand-slate-gray mt-6 max-w-2xl mx-auto leading-relaxed">
+              Serving Cape May, Avalon & Stone Harbor with a meticulous three-step restoration process designed to last for years.
             </p>
           </div>
         </FadeIn>
-        <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+        
+        <div className="grid md:grid-cols-3 gap-8 xl:gap-12">
           {services.map((service, index) => (
-            // The `delay` prop creates a staggered animation effect, where each card fades in one after another.
-            <FadeIn key={index} delay={index * 150}>
-              <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center h-full">
-                <div className="flex justify-center mb-6">{service.icon}</div>
-                <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-2">{service.title}</h3>
-                <p className="text-brand-slate-gray">{service.description}</p>
+            <FadeIn key={index} delay={index * 150} direction="up">
+              <div className="group bg-white p-8 sm:p-10 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500 hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] hover:-translate-y-2 flex flex-col items-center text-center h-full relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                
+                <div className="flex justify-center mb-8 relative">
+                  <div className="absolute inset-0 bg-brand-gold/10 blur-xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-500"></div>
+                  <div className="relative transform transition-transform duration-500 group-hover:scale-110">
+                    {service.icon}
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-4 group-hover:text-brand-gold transition-colors duration-300">{service.title}</h3>
+                <p className="text-brand-slate-gray leading-relaxed">{service.description}</p>
               </div>
             </FadeIn>
           ))}

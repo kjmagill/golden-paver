@@ -7,6 +7,7 @@ interface BeforeAfterSliderProps {
   afterAlt?: string;
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'high' | 'low' | 'auto';
+  aspectRatio?: string;
 }
 
 /**
@@ -29,7 +30,8 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   beforeAlt = 'Before restoration', 
   afterAlt = 'After restoration',
   loading = 'lazy',
-  fetchpriority = 'auto'
+  fetchpriority = 'auto',
+  aspectRatio = 'aspect-[4/3]'
 }) => {
   // `sliderPosition` stores the handle's position as a percentage (0-100).
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -116,7 +118,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   return (
     <div 
       ref={containerRef}
-      className="relative w-full aspect-[4/3] select-none overflow-hidden rounded-2xl shadow-2xl group bg-gray-100"
+      className={`relative w-full ${aspectRatio} select-none overflow-hidden rounded-2xl shadow-2xl group bg-gray-100`}
       // ARIA attributes for screen readers to understand this as a slider.
       role="slider"
       aria-valuenow={Math.round(sliderPosition)}
@@ -145,8 +147,9 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
       <div 
         className="absolute inset-0 w-full h-full overflow-hidden" 
         // The `clipPath` CSS property creates the reveal effect.
-        // It defines a rectangular clipping mask that is resized based on the slider's position.
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        // We now clip the left side of the 'after' image based on slider position,
+        // so the 'before' image (bottom layer) is visible on the left and 'after' on the right.
+        style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
       >
         {afterError ? (
           <ImagePlaceholder text="After" />
