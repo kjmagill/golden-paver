@@ -1,0 +1,20 @@
+{
+  "name": "Golden Paver Restorations",
+  "short_name": "Golden Paver",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#111F3A",
+  "background_color": "#F9FAFB",
+  "display": "standalone",
+  "start_url": "/"
+}
