@@ -130,7 +130,7 @@ const Contact: React.FC = () => {
 
     setStatus('submitting');
 
-    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbzm5mq7fzV63JkxbTrSfBIIQSJUUH6dRijRIy0F2pMmR-oC4YNrZl7bA-HWEG94L_9c/exec';
+    const spreadsheetEndpoint = 'https://script.google.com/macros/s/AKfycbysxAfpNJmd1IpIVTDur3t9UrEwGgPPXg9Pg5hxqY08SaLZ2n6zv3G80b5YVh-I1x-R/exec';
 
     const { hp, ...payload } = formData;
     
