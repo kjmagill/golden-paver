@@ -14,7 +14,7 @@ const socialLinks = {
 
 const serviceAreas = [
     'Avalon', 'Stone Harbor', 'Cape May',
-    'The Wildwoods', 'CM Court House', 'North Cape May',
+    'The Wildwoods', 'Court House', 'North Cape May',
 ];
 
 /**
