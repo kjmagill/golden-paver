@@ -24,6 +24,19 @@ const ImagePlaceholder: React.FC<{ text: string }> = ({ text }) => (
 );
 
 
+const FALLBACK_IMAGE_MAP: Record<string, string> = {
+  '/images/canyonclub-before.jpg': 'https://i.ibb.co/XrHdr9ZQ/canyonclub-before.jpg',
+  '/images/canyonclub-after.jpg': 'https://i.ibb.co/ks5NHd75/canyonclub-after.jpg',
+  '/images/f1.jpg': 'https://i.postimg.cc/yxn2B8mg/f1.jpg',
+  '/images/f2.jpg': 'https://i.postimg.cc/Wp7B0XQC/f2.jpg',
+  '/images/brick-before.jpg': 'https://i.ibb.co/nND7yd90/brick-before.jpg',
+  '/images/brick-after.jpg': 'https://i.ibb.co/8gKKpn14/brick-after.jpg',
+  '/images/h1.jpg': 'https://i.postimg.cc/rFMtPFZh/h1.jpg',
+  '/images/h2.jpg': 'https://i.postimg.cc/YCSLtDHB/h2.jpg',
+  '/images/j2.jpg': 'https://i.postimg.cc/Wp7B0XQC/f2.jpg',
+  '/images/gp-social.png': 'https://i.ibb.co/rGDFR2QD/gp-social.png',
+};
+
 const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({ 
   before, 
   after, 
@@ -37,6 +50,13 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   const [sliderPosition, setSliderPosition] = useState(50);
   // `isDragging` is a flag to track whether the user is actively dragging the handle.
   const [isDragging, setIsDragging] = useState(false);
+  
+  // Track active image sources with automatic backup fallback support.
+  const [currentBefore, setCurrentBefore] = useState(before);
+  const [currentAfter, setCurrentAfter] = useState(after);
+  const [beforeTriedFallback, setBeforeTriedFallback] = useState(false);
+  const [afterTriedFallback, setAfterTriedFallback] = useState(false);
+
   // State to track image loading errors.
   const [beforeError, setBeforeError] = useState(false);
   const [afterError, setAfterError] = useState(false);
@@ -44,11 +64,35 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLDivElement>(null);
 
-  // When the image sources change, reset the error states.
+  // When the image sources change, reset the error and fallback states.
   useEffect(() => {
+    setCurrentBefore(before);
+    setCurrentAfter(after);
+    setBeforeTriedFallback(false);
+    setAfterTriedFallback(false);
     setBeforeError(false);
     setAfterError(false);
   }, [before, after]);
+
+  const handleBeforeError = () => {
+    const fallback = FALLBACK_IMAGE_MAP[currentBefore];
+    if (fallback && !beforeTriedFallback) {
+      setBeforeTriedFallback(true);
+      setCurrentBefore(fallback);
+    } else {
+      setBeforeError(true);
+    }
+  };
+
+  const handleAfterError = () => {
+    const fallback = FALLBACK_IMAGE_MAP[currentAfter];
+    if (fallback && !afterTriedFallback) {
+      setAfterTriedFallback(true);
+      setCurrentAfter(fallback);
+    } else {
+      setAfterError(true);
+    }
+  };
 
   /**
    * Calculates and sets the slider position based on the client's X coordinate.
@@ -131,7 +175,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         <ImagePlaceholder text="Before" />
       ) : (
         <img 
-          src={before} 
+          src={currentBefore} 
           alt={beforeAlt} 
           className="absolute inset-0 w-full h-full object-cover" 
           draggable="false" 
@@ -139,7 +183,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           decoding="async" 
           fetchPriority={fetchpriority} 
           width="800" height="600" 
-          onError={() => setBeforeError(true)}
+          onError={handleBeforeError}
         />
       )}
       
@@ -155,7 +199,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
           <ImagePlaceholder text="After" />
         ) : (
           <img 
-            src={after} 
+            src={currentAfter} 
             alt={afterAlt} 
             className="absolute inset-0 w-full h-full object-cover" 
             draggable="false" 
@@ -163,7 +207,7 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             decoding="async" 
             fetchPriority={fetchpriority} 
             width="800" height="600" 
-            onError={() => setAfterError(true)}
+            onError={handleAfterError}
           />
         )}
       </div>
