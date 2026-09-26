@@ -57,37 +57,37 @@ const services = [
  */
 const Services: React.FC = () => {
   return (
-    <section id="services" className="py-24 sm:py-32 bg-gray-50/50 relative overflow-hidden">
+    <section id="services" className="py-20 sm:py-24 lg:py-28 bg-gray-50/60 relative overflow-hidden">
       {/* Subtle Background Accent */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold/20 to-transparent"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <FadeIn>
-          <div className="text-center mb-16 sm:mb-20">
-            <span className="text-brand-gold font-display font-bold text-sm tracking-[0.2em] uppercase mb-4 block">Proven Process</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-brand-oxford-blue tracking-tight">Our Restoration Services</h2>
-            <div className="w-20 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
-            <p className="text-lg text-brand-slate-gray mt-6 max-w-2xl mx-auto leading-relaxed">
+          <div className="text-center mb-12 sm:mb-16">
+            <span className="text-brand-gold font-display font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 block">Proven Process</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold font-display text-brand-oxford-blue tracking-tight">Our Restoration Services</h2>
+            <div className="w-12 h-1 bg-brand-gold mx-auto mt-4 mb-5 rounded-full"></div>
+            <p className="text-base sm:text-lg text-brand-slate-gray max-w-2xl mx-auto leading-relaxed">
               Serving Cape May, Avalon & Stone Harbor with a meticulous three-step restoration process designed to last for years.
             </p>
           </div>
         </FadeIn>
         
-        <div className="grid md:grid-cols-3 gap-8 xl:gap-12">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 xl:gap-10">
           {services.map((service, index) => (
             <FadeIn key={index} delay={index * 150} direction="up">
-              <div className="group bg-white p-8 sm:p-10 rounded-2xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] border border-gray-100 transition-all duration-500 hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15)] hover:-translate-y-2 flex flex-col items-center text-center h-full relative overflow-hidden">
+              <div className="group bg-white p-7 sm:p-9 lg:p-8 xl:p-9 rounded-2xl shadow-[0_10px_35px_-15px_rgba(0,0,0,0.08)] border border-gray-100 transition-all duration-500 hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 flex flex-col items-center text-center h-full relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-brand-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
                 
-                <div className="flex justify-center mb-8 relative">
+                <div className="flex justify-center mb-6 relative">
                   <div className="absolute inset-0 bg-brand-gold/10 blur-xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-500"></div>
                   <div className="relative transform transition-transform duration-500 group-hover:scale-110">
                     {service.icon}
                   </div>
                 </div>
                 
-                <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-4 group-hover:text-brand-gold transition-colors duration-300">{service.title}</h3>
-                <p className="text-brand-slate-gray leading-relaxed">{service.description}</p>
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-brand-oxford-blue mb-3 group-hover:text-brand-gold transition-colors duration-300">{service.title}</h3>
+                <p className="text-sm sm:text-base text-brand-slate-gray leading-relaxed">{service.description}</p>
               </div>
             </FadeIn>
           ))}

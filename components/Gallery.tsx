@@ -128,22 +128,22 @@ interface GalleryItem {
 
 const galleryItems: GalleryItem[] = [
   { 
-    before: 'https://i.postimg.cc/yxn2B8mg/f1.jpg', 
-    after: 'https://i.postimg.cc/Wp7B0XQC/f2.jpg', 
+    before: '/images/f1.jpg', 
+    after: '/images/f2.jpg', 
     title: 'Patio Transformation',
     beforeAlt: 'A beautifully clean and vibrant brick paver patio after sealing service in Stone Harbor, NJ.',
     afterAlt: 'A grimy, moss-covered brick paver patio before professional pressure washing and restoration.'
   },
   { 
-    before: 'https://i.ibb.co/nND7yd90/brick-before.jpg', 
-    after: 'https://i.ibb.co/8gKKpn14/brick-after.jpg', 
+    before: '/images/brick-before.jpg', 
+    after: '/images/brick-after.jpg', 
     title: 'Driveway Revival',
     beforeAlt: 'A faded and stained paver driveway with weeds growing in the joints before restoration.',
     afterAlt: 'A revived paver driveway with rich color and clean joint lines after polymeric sanding and sealing.'
   },
   { 
-    before: 'https://i.postimg.cc/rFMtPFZh/h1.jpg', 
-    after: 'https://i.postimg.cc/YCSLtDHB/h2.jpg', 
+    before: '/images/h1.jpg', 
+    after: '/images/h2.jpg', 
     title: 'Walkway Restoration',
     beforeAlt: 'A pristine and welcoming paver walkway, looking brand new after a deep clean and seal restoration.',
     afterAlt: 'An old paver walkway, discolored and covered in dirt before cleaning services.'
@@ -167,25 +167,25 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <section id="gallery" className="py-24 sm:py-32 bg-white relative overflow-hidden">
+    <section id="gallery" className="py-20 sm:py-24 lg:py-28 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         <FadeIn>
-          <div className="text-center mb-16 sm:mb-20">
-            <span className="text-brand-gold font-display font-bold text-sm tracking-[0.2em] uppercase mb-4 block">Our Portfolio</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-brand-oxford-blue tracking-tight">Proven Results</h2>
-            <div className="w-20 h-1 bg-brand-gold mx-auto mt-6 rounded-full"></div>
-            <p className="text-lg text-brand-slate-gray mt-6 max-w-2xl mx-auto leading-relaxed">
+          <div className="text-center mb-12 sm:mb-16">
+            <span className="text-brand-gold font-display font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 block">Our Portfolio</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold font-display text-brand-oxford-blue tracking-tight">Proven Results</h2>
+            <div className="w-12 h-1 bg-brand-gold mx-auto mt-4 mb-5 rounded-full"></div>
+            <p className="text-base sm:text-lg text-brand-slate-gray max-w-2xl mx-auto leading-relaxed">
               Explore our recent transformations across South Jersey and witness the dramatic difference our expertise makes.
             </p>
           </div>
         </FadeIn>
         
-        <div className="grid lg:grid-cols-3 gap-12 xl:gap-16">
+        <div className="grid lg:grid-cols-3 gap-8 xl:gap-10">
           {galleryItems.map((item, index) => (
             <FadeIn key={index} delay={index * 150} direction="up">
               <div className="group flex flex-col h-full">
                 <div 
-                  className="relative cursor-zoom-in overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+                  className="relative cursor-zoom-in overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
                   onClick={() => openModal(item)}
                 >
                   <BeforeAfterSlider 
@@ -196,7 +196,7 @@ const Gallery: React.FC = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-brand-oxford-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
-                    <div className="bg-white/90 backdrop-blur-sm p-3 rounded-full scale-50 group-hover:scale-100 transition-transform duration-300">
+                    <div className="bg-white/90 backdrop-blur-sm p-3 rounded-full scale-50 group-hover:scale-100 transition-transform duration-300 shadow-md">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-oxford-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                       </svg>
@@ -204,9 +204,9 @@ const Gallery: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="mt-8">
-                  <h3 className="text-2xl font-bold font-display text-brand-oxford-blue mb-2">{item.title}</h3>
-                  <div className="flex items-center gap-2 text-brand-gold text-sm font-semibold uppercase tracking-wider">
+                <div className="mt-5">
+                  <h3 className="text-xl sm:text-2xl font-bold font-display text-brand-oxford-blue mb-1.5">{item.title}</h3>
+                  <div className="flex items-center gap-2 text-brand-gold text-xs sm:text-[13px] font-semibold uppercase tracking-[0.14em]">
                     <span>Cape May County, NJ</span>
                     <span className="w-1 h-1 bg-brand-gold rounded-full"></span>
                     <span>Restoration</span>
@@ -228,7 +228,7 @@ const Gallery: React.FC = () => {
                 afterAlt={selectedItem.afterAlt}
                 loading="eager"
             />
-            <div className="bg-brand-oxford-blue/90 backdrop-blur-md p-6 mt-4 rounded-xl border border-white/10 text-center">
+            <div className="bg-brand-oxford-blue/95 backdrop-blur-md p-5 sm:p-6 mt-3.5 rounded-xl border border-white/10 text-center">
                <h4 className="text-xl font-bold font-display text-white mb-1">{selectedItem.title}</h4>
                <p className="text-brand-powder-blue text-sm">Full deep clean, polymeric sanding, and premium seal application.</p>
             </div>

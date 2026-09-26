@@ -211,85 +211,94 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 bg-brand-oxford-blue text-brand-powder-blue">
+    <section id="contact" className="py-20 sm:py-24 lg:py-28 bg-brand-oxford-blue text-brand-powder-blue relative overflow-hidden">
       <div className="container mx-auto px-6">
         <FadeIn>
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold font-display text-white">Ready to Transform Your Space?</h2>
-            <div className="max-w-3xl mx-auto">
-              <p className="text-lg text-brand-powder-blue mt-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <span className="text-brand-gold font-display font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 block">Get In Touch</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold font-display text-white tracking-tight">Ready to Transform Your Space?</h2>
+            <div className="w-12 h-1 bg-brand-gold mx-auto mt-4 mb-5 rounded-full"></div>
+            <div className="max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-brand-powder-blue/90 leading-relaxed">
                 Fill out the form below for a free, no-obligation estimate. One of our owners will get back to you within 24 hours.
               </p>
-              <p className="text-lg text-brand-powder-blue mt-2">
+              <p className="text-sm sm:text-base text-brand-powder-blue/80 mt-3 font-medium">
                 Prefer to talk? Call us for an even faster response: 
-                <a href="tel:609-408-5000" className="font-bold text-white hover:text-brand-gold-light transition-colors whitespace-nowrap"> 609-408-5000</a>
+                <a href="tel:609-408-5000" className="font-bold text-brand-gold-light hover:text-white transition-colors whitespace-nowrap ml-1.5 underline decoration-brand-gold/40 underline-offset-4">609-408-5000</a>
               </p>
             </div>
           </div>
         </FadeIn>
         <FadeIn delay={150}>
-          <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-6 sm:p-8 rounded-lg shadow-2xl">
+          <div className="max-w-2xl mx-auto bg-white text-brand-oxford-blue p-6 sm:p-10 lg:p-12 rounded-2xl shadow-2xl border border-white/10">
             {status === 'success' || status === 'error' ? renderStatusMessage() : (
               // The form itself.
               <form ref={formRef} onSubmit={handleSubmit} noValidate>
                 {/* Form-level error message for screen readers and keyboard users */}
                 {formError && (
-                  <div role="alert" className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded">
+                  <div role="alert" className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg text-sm">
                     <p>{formError}</p>
                   </div>
                 )}
-                <p className="text-sm text-gray-600 mb-6 italic">Fields marked with <span className="text-red-500 not-italic font-bold">*</span> are required.</p>
+                <p className="text-xs text-gray-500 mb-6 italic">Fields marked with <span className="text-red-500 not-italic font-bold">*</span> are required.</p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-bold mb-2">Full Name <span className="text-red-500">*</span></label>
-                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} onBlur={handleBlur} maxLength={50} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.name ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />
-                    {touched.name && errors.name && <p id="name-error" className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                    <label htmlFor="name" className="block text-xs font-display font-bold uppercase tracking-wider text-brand-oxford-blue mb-2">Full Name <span className="text-red-500">*</span></label>
+                    <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} onBlur={handleBlur} maxLength={50} className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl transition-colors focus:outline-none focus:ring-2 ${errors.name ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-brand-gold focus:ring-brand-gold/20'}`} required aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />
+                    {touched.name && errors.name && <p id="name-error" className="text-red-500 text-xs mt-1.5">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-bold mb-2">Phone Number <span className="text-red-500">*</span></label>
-                    <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.phone ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} />
-                    {touched.phone && errors.phone && <p id="phone-error" className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                    <label htmlFor="phone" className="block text-xs font-display font-bold uppercase tracking-wider text-brand-oxford-blue mb-2">Phone Number <span className="text-red-500">*</span></label>
+                    <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} onBlur={handleBlur} className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl transition-colors focus:outline-none focus:ring-2 ${errors.phone ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-brand-gold focus:ring-brand-gold/20'}`} required aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} />
+                    {touched.phone && errors.phone && <p id="phone-error" className="text-red-500 text-xs mt-1.5">{errors.phone}</p>}
                   </div>
                 </div>
-                <div className="mb-6">
-                  <label htmlFor="address" className="block text-sm font-bold mb-2">Service Address <span className="text-red-500">*</span></label>
-                  <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} onBlur={handleBlur} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.address ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.address} aria-describedby={errors.address ? "address-error" : undefined} />
-                  {touched.address && errors.address && <p id="address-error" className="text-red-500 text-xs mt-1">{errors.address}</p>}
+                <div className="mb-5">
+                  <label htmlFor="address" className="block text-xs font-display font-bold uppercase tracking-wider text-brand-oxford-blue mb-2">Service Address <span className="text-red-500">*</span></label>
+                  <input type="text" id="address" name="address" value={formData.address} onChange={handleChange} onBlur={handleBlur} className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl transition-colors focus:outline-none focus:ring-2 ${errors.address ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-brand-gold focus:ring-brand-gold/20'}`} required aria-invalid={!!errors.address} aria-describedby={errors.address ? "address-error" : undefined} />
+                  {touched.address && errors.address && <p id="address-error" className="text-red-500 text-xs mt-1.5">{errors.address}</p>}
                 </div>
                 {/* Service Type Selection */}
-                <div className="mb-6">
+                <div className="mb-5">
                    <fieldset aria-describedby={errors.service ? "service-error" : undefined}>
-                    <legend className="block text-sm font-bold mb-2">Service of Interest <span className="text-red-500">*</span></legend>
-                    <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                    <legend className="block text-xs font-display font-bold uppercase tracking-wider text-brand-oxford-blue mb-2">Service of Interest <span className="text-red-500">*</span></legend>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1.5">
                       {serviceOptions.map((option) => {
                         const optionId = option.replace(/[\s/&]+/g, '-').toLowerCase();
+                        const isChecked = formData.service === option;
                         return (
-                          <div key={option} className="flex items-center">
+                          <label
+                            key={option}
+                            htmlFor={optionId}
+                            className={`flex items-center gap-3 p-3 rounded-xl border transition-all cursor-pointer ${
+                              isChecked 
+                                ? 'border-brand-gold bg-brand-gold/5 shadow-sm text-brand-oxford-blue font-semibold' 
+                                : 'border-gray-200 hover:border-brand-gold/40 text-gray-700 bg-white'
+                            }`}
+                          >
                             <input
                               type="radio"
                               id={optionId}
                               name="service"
                               value={option}
-                              checked={formData.service === option}
+                              checked={isChecked}
                               onChange={handleRadioChange}
                               onBlur={handleBlur}
-                              className="h-4 w-4 text-brand-gold focus:ring-brand-powder-blue border-gray-300"
+                              className="h-4 w-4 text-brand-gold focus:ring-brand-gold/30 border-gray-300 accent-[#CA9703]"
                             />
-                            <label htmlFor={optionId} className="ml-3 block text-sm text-gray-800">
-                              {option}
-                            </label>
-                          </div>
+                            <span className="text-sm font-medium">{option}</span>
+                          </label>
                         );
                       })}
                     </div>
                   </fieldset>
-                  {touched.service && errors.service && <p id="service-error" className="text-red-500 text-xs mt-2">{errors.service}</p>}
+                  {touched.service && errors.service && <p id="service-error" className="text-red-500 text-xs mt-1.5">{errors.service}</p>}
                 </div>
                 <div className="mb-6">
-                  <label htmlFor="message" className="block text-sm font-bold mb-2">Tell Us About Your Project <span className="text-red-500">*</span></label>
-                  <textarea id="message" name="message" value={formData.message} onChange={handleChange} onBlur={handleBlur} rows={5} maxLength={1000} className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 ${errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:ring-brand-powder-blue'}`} required aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}></textarea>
-                  {touched.message && errors.message && <p id="message-error" className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                  <label htmlFor="message" className="block text-xs font-display font-bold uppercase tracking-wider text-brand-oxford-blue mb-2">Tell Us About Your Project <span className="text-red-500">*</span></label>
+                  <textarea id="message" name="message" value={formData.message} onChange={handleChange} onBlur={handleBlur} rows={4} maxLength={1000} className={`w-full px-4 py-3 text-sm sm:text-base border rounded-xl transition-colors focus:outline-none focus:ring-2 ${errors.message ? 'border-red-500 focus:ring-red-400' : 'border-gray-300 focus:border-brand-gold focus:ring-brand-gold/20'}`} required aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined}></textarea>
+                  {touched.message && errors.message && <p id="message-error" className="text-red-500 text-xs mt-1.5">{errors.message}</p>}
                 </div>
 
                 {/* Honeypot Field for Spam Protection */}
@@ -297,11 +306,11 @@ const Contact: React.FC = () => {
                     <input type="text" name="hp" value={formData.hp} onChange={handleChange} tabIndex={-1} autoComplete="off" />
                 </div>
 
-                <div className="text-center">
+                <div className="text-center pt-2">
                   <button 
                     type="submit" 
                     disabled={status === 'submitting'} 
-                    className="w-full group inline-flex items-center justify-center gap-3 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-3 px-8 rounded-lg shadow-xl transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-2xl hover:-translate-y-1 active:scale-95 active:translate-y-0 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-brand-gold disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+                    className="w-full group inline-flex items-center justify-center gap-3 bg-gradient-to-br from-brand-gold-light to-brand-gold text-brand-oxford-blue font-bold py-3.5 px-8 rounded-xl shadow-xl transition-all duration-300 ease-in-out hover:brightness-110 hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 active:translate-y-0 active:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-brand-gold disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
                   >
                     {status === 'submitting' ? (
                       // Loading state UI.
@@ -315,8 +324,8 @@ const Contact: React.FC = () => {
                     ) : (
                       // Default button UI.
                       <>
-                        <span className="font-display [text-shadow:0_1px_0_rgba(255,255,255,0.3)]">Submit Request</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
+                        <span className="font-display uppercase tracking-widest text-xs sm:text-sm [text-shadow:0_1px_0_rgba(255,255,255,0.3)]">Submit Request</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </svg>
                       </>

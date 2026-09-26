@@ -183,16 +183,16 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
             tabIndex={0} // Makes the handle focusable.
             role="presentation" // The main container has the slider role
           >
-            <div className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center shadow-lg border-2 border-white/50 transition-all duration-300 group-focus:scale-110 group-focus:border-brand-gold-light ${isDragging ? 'border-brand-gold-light' : 'group-hover:border-brand-gold-light'}`}>
-              <svg className={`w-5 h-5 sm:w-6 sm:w-6 text-brand-oxford-blue/80 transition-colors duration-300 group-focus:text-brand-oxford-blue ${isDragging ? 'text-brand-oxford-blue' : 'group-hover:text-brand-oxford-blue'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 7l-5 5 5 5M15 7l5 5-5 5"></path>
+            <div className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 bg-white rounded-full h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center shadow-xl border-2 border-white/80 transition-all duration-300 group-focus:scale-110 group-focus:border-brand-gold-light ${isDragging ? 'border-brand-gold-light' : 'group-hover:border-brand-gold-light'}`}>
+              <svg className={`w-4 h-4 text-brand-oxford-blue/80 transition-colors duration-300 group-focus:text-brand-oxford-blue ${isDragging ? 'text-brand-oxford-blue' : 'group-hover:text-brand-oxford-blue'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 7l-5 5 5 5M15 7l5 5-5 5"></path>
               </svg>
             </div>
           </div>
           
           {/* Labels */}
-          <div aria-hidden="true" className={`absolute top-3 left-3 bg-brand-oxford-blue bg-opacity-70 text-white text-xs font-bold px-3 py-1.5 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 focus-within:opacity-0 ${isDragging ? 'opacity-0' : 'opacity-100'}`}>BEFORE</div>
-          <div aria-hidden="true" className={`absolute top-3 right-3 bg-brand-oxford-blue bg-opacity-70 text-white text-xs font-bold px-3 py-1.5 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 focus-within:opacity-0 ${isDragging ? 'opacity-0' : 'opacity-100'}`}>AFTER</div>
+          <div aria-hidden="true" className={`absolute top-3 left-3 bg-brand-oxford-blue/80 text-white text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 border border-white/10 shadow-sm ${isDragging ? 'opacity-0' : 'opacity-100'}`}>BEFORE</div>
+          <div aria-hidden="true" className={`absolute top-3 right-3 bg-brand-oxford-blue/80 text-white text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm pointer-events-none transition-opacity duration-300 border border-white/10 shadow-sm ${isDragging ? 'opacity-0' : 'opacity-100'}`}>AFTER</div>
         </>
       )}
     </div>
