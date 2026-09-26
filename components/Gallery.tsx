@@ -184,10 +184,7 @@ const Gallery: React.FC = () => {
           {galleryItems.map((item, index) => (
             <FadeIn key={index} delay={index * 150} direction="up">
               <div className="group flex flex-col h-full">
-                <div 
-                  className="relative cursor-zoom-in overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
-                  onClick={() => openModal(item)}
-                >
+                <div className="relative overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1">
                   <BeforeAfterSlider 
                     before={item.before} 
                     after={item.after}
@@ -195,21 +192,29 @@ const Gallery: React.FC = () => {
                     afterAlt={item.afterAlt}
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-brand-oxford-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
-                    <div className="bg-white/90 backdrop-blur-sm p-3 rounded-full scale-50 group-hover:scale-100 transition-transform duration-300 shadow-md">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-brand-oxford-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                      </svg>
-                    </div>
-                  </div>
+                  {/* Dedicated Zoom button in bottom-right corner, leaving slider handle and arrows completely unobstructed */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openModal(item);
+                    }}
+                    onMouseDown={(e) => e.stopPropagation()}
+                    onTouchStart={(e) => e.stopPropagation()}
+                    className="absolute bottom-3 right-3 z-20 flex items-center gap-1.5 px-3 py-1.5 bg-brand-oxford-blue/85 hover:bg-brand-oxford-blue text-white text-xs font-semibold rounded-lg backdrop-blur-md border border-white/20 shadow-md transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-gold cursor-pointer"
+                    aria-label={`Zoom in on ${item.title}`}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-brand-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                    <span>Zoom</span>
+                  </button>
                 </div>
                 
                 <div className="mt-5">
                   <h3 className="text-xl sm:text-2xl font-bold font-display text-brand-oxford-blue mb-1.5">{item.title}</h3>
-                  <div className="flex items-center gap-2 text-brand-gold text-xs sm:text-[13px] font-semibold uppercase tracking-[0.14em]">
+                  <div className="flex items-center text-brand-gold text-xs sm:text-[13px] font-semibold uppercase tracking-[0.14em]">
                     <span>Cape May County, NJ</span>
-                    <span className="w-1 h-1 bg-brand-gold rounded-full"></span>
-                    <span>Restoration</span>
                   </div>
                 </div>
               </div>

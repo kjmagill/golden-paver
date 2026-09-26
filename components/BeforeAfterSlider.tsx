@@ -110,14 +110,32 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault(); // Prevent text selection while dragging
+    e.stopPropagation();
     setIsDragging(true);
     handleRef.current?.focus(); // Focus the handle for keyboard events
   }, []);
   
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    e.stopPropagation();
     setIsDragging(true);
     handleRef.current?.focus();
   }, []);
+
+  const handleContainerMouseDown = useCallback((e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    handleMove(e.clientX);
+    setIsDragging(true);
+    handleRef.current?.focus();
+  }, [handleMove]);
+
+  const handleContainerTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length > 0) {
+      handleMove(e.touches[0].clientX);
+      setIsDragging(true);
+      handleRef.current?.focus();
+    }
+  }, [handleMove]);
 
   // Effect to handle the dragging logic by adding global event listeners.
   useEffect(() => {
@@ -162,7 +180,9 @@ const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full ${aspectRatio} select-none overflow-hidden rounded-2xl shadow-2xl group bg-gray-100`}
+      onMouseDown={handleContainerMouseDown}
+      onTouchStart={handleContainerTouchStart}
+      className={`relative w-full ${aspectRatio} select-none overflow-hidden rounded-2xl shadow-2xl group bg-gray-100 cursor-ew-resize`}
       // ARIA attributes for screen readers to understand this as a slider.
       role="slider"
       aria-valuenow={Math.round(sliderPosition)}
